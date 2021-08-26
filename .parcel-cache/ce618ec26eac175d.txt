@@ -50,7 +50,7 @@
 88C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\node_modules\lodash\replace.js132700883372430000 0
 117C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\node_modules\terser\node_modules\source-map\source-map.d.ts132700883412550000 0
 122C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\node_modules\caniuse-lite\data\features\getboundingclientrect.js132737405886740000 0
-68C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\.gitignore132744790121876822 0
+68C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\.gitignore132744806346094256 0
 105C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\node_modules\postcss-modules-scope\lib\index.js132738399876120000 0
 97C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\node_modules\mdn-data\css\syntaxes.json132700883515750000 0
 88C:\Users\agafo\Projects\middle.messenger.praktikum.yandex\node_modules\request\README.md132700883387650000 0
