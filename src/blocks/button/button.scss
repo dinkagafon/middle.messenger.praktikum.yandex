@@ -1,0 +1,28 @@
+
+.button{
+    background-color: var(--UI-accent-basic);
+    color: var(--text-basic);
+
+    border: none;
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 2px;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: var(--UI-accent-light);
+    }
+    &_fullWidth{
+        width: 100%;
+    }
+    &__text{
+        @include text-medium;
+    }
+    &_disable{
+        cursor: default;
+        color: rgba(256, 256, 256, .4);
+        &:hover{
+            background-color: var(--UI-accent-basic);
+        }
+    }
+}

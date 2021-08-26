@@ -1,0 +1,16 @@
+extends ../components/layout
+include ../blocks/button/button
+include ../blocks/field/field
+include ../blocks/fieldsBox/fieldsBox
+include ../blocks/form/form
+include ../blocks/formAuth/formAuth
+include ../blocks/centering/centering
+
+
+block head
+  - var pageTitle = '404';
+
+block content
+    +centering
+        +formFooter('Ошибка 404. Такой страницы нет', "./",  'Перейти на главную')
+    

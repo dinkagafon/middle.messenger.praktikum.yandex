@@ -1,0 +1,18 @@
+extends ../form/form
+include ../formFooter/formFooter
+
+
+mixin formProfile()
+    +form
+        block title 
+            p Настройки профиля
+        block content 
+            - var data = [{place: 'Имя', name: 'first_name'},{place:'Фамилия', name: 'second_name'},{place:'Логин', name: 'login'},{place:'Почта', name: 'email'},{place:'Телефон', name: 'phone'},{place:'Отображаемое имя', name: 'display_name'},{place:'Старый пароль', name: 'oldPassword'},{place:'Новый пароль', name: 'newPassword'}]
+            +fieldsBox(data)
+        block button 
+            +button.button_fullWidth Сохранить
+
+
+    
+
+
