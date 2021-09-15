@@ -1,17 +1,15 @@
-
-mixin form()
-    .form
-        .form_body
-            .form_title 
-                block title
-            .form_content
-                block content
-            .form_button
-                    block button 
-        .form_footer
-                block footer    
+.form_body
+  .form_title 
+    p #{titleText}
+  .form_content
+    each val in fields 
+        | !{val}
+  .form_button
+    | !{button}
+//.form_footer
+ // block footer    
 
 
-    
+
 
 
