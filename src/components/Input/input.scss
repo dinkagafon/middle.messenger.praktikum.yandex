@@ -1,0 +1,22 @@
+.input {
+  @include text-regular;
+  background-color: var(--UI-back-input);
+  border-radius: 2px;
+  border-style: none;
+  color: var(--text-basic);
+  display: inline-block;
+  height: 30px;
+  outline: none;
+  padding: 0 20px;
+  width: 100%;
+  &::placeholder {
+    @include text-regular;
+    color: var(--text-disable);
+  }
+  &_fullWidth {
+    width: 100%;
+  }
+  &_wrong {
+    outline: 1px solid var(--UI-input-danger);
+  }
+}

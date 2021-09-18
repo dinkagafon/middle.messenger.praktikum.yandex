@@ -4,16 +4,21 @@
   "author": "dinkagafon <agafonikita@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel src/index.html",
+    "dev": "parcel static/pages/*.html",
     "start": "node ./server.js",
-    "build": "./node_modules/.bin/parcel build src/index.html --dist-dir build",
+    "build": "parcel build src/index.html --dist-dir build",
     "lint": "node_modules/.bin/eslint .",
     "slint": "stylelint src/*.scss"
   },
   "engines": {
     "node": "v14.17.3"
   },
+  "staticFiles": {
+    "staticPath": "static",
+    "watcherGlob": "**"
+  },
   "devDependencies": {
+    "@parcel/transformer-image": "2.0.0-rc.0",
     "@parcel/transformer-pug": "2.0.0-rc.0",
     "@parcel/transformer-sass": "2.0.0-rc.0",
     "@parcel/types": "^2.0.0-alpha.3",
@@ -27,6 +32,7 @@
     "eslint-plugin-import": "^2.24.2",
     "express": "^4.17.1",
     "parcel": "^2.0.0-rc.0",
+    "parcel-plugin-static-files-copy": "^2.6.0",
     "parcel-transformer-pug-precompile": "^1.0.6",
     "prettier": "^2.3.2",
     "stylelint": "^13.13.1",

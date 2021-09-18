@@ -1,10 +1,11 @@
-import Block from '../../block/Block';
+import Block from '../../utils/Block';
 import Events from '../../types/Events';
 
 class Input extends Block {
   constructor(props: {
     placeholder: string,
     name: string,
+    type: string,
     events?: Events,
     validFunc?: (v: string) => boolean
   }) {
@@ -12,6 +13,7 @@ class Input extends Block {
       class: 'input',
       placeholder: props.placeholder,
       name: props.name,
+      type: props.type,
     }, {
       events: props.events,
       wrong: false,
@@ -27,12 +29,9 @@ class Input extends Block {
     this.attrs.class = baseClass;
   }
 
-  componentDidMount() {
+  render() {
     this.setClass();
-  }
-
-  componentDidUpdate() {
-    this.setClass();
+    return '';
   }
 }
 

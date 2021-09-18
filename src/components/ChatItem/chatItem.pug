@@ -1,0 +1,11 @@
+.chat-item__main
+  .chat-item__img-container
+    img.chat-item__img(src= img)
+  .chat-item__content
+    p.chat-item__author #{author} 
+    p.chat-item__message #{message}
+.chat-item__meta
+    .chat-item__count
+      if count !== '0'
+        .chat-item__count-text #{count}
+    p.chat-item__date #{date}

@@ -1,15 +1,25 @@
 @import "styles/mixins";
 @import "styles/var";
-@import "blocks";
 
-@import "./styles/fonts";
-
+@import "./components/Button/button";
+@import "./components/MainForm/mainForm";
+@import "./components/Input/input";
+@import "./components/Identification/identification";
+@import "./components/Helper/helper";
+@import "./components/ChatItem/chatItem";
+@import "./components/ChatsList/chatsList";
+@import "./components/ProfileButton/profileButton";
+@import "./components/ChatWindow/chatWindow";
+@import "./templates/centering/centering";
+@import "./pages/chat/chat";
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
+a {
+  text-decoration: none;
+}
 body {
   background-color: #22262b;
 }

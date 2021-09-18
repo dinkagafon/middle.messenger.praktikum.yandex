@@ -1,17 +1,17 @@
-import Block from '../../block/Block';
-import Button from '../../block/Button';
-import form from '../../blocks/form/form.pug';
-import Input from '../Input/Input';
+import Block from '../../utils/Block';
+import Button from '../Button';
+import Input from '../Input';
 
 class Form extends Block {
   constructor(props: {
     fields: Array<{
       placeholder: string,
       name: string,
-      validFunc?: (v: string) => boolean
+      validFunc?: (v: string) => boolean,
+      type: string,
     }>,
     buttonText: string,
-    valid: boolean
+    valid?: boolean
     submit: (formObj: Record<string, string>) => void,
   }) {
     const fieldsArray: Array<Input> = props.fields
@@ -32,10 +32,9 @@ class Form extends Block {
         validFunc: f.validFunc,
         placeholder: f.placeholder,
         name: f.name,
+        type: f.type,
       }));
-    super('div', {
-      class: 'form',
-    }, {
+    super('div', {}, {
       fields: fieldsArray,
       button: new Button({
         text: props.buttonText,
@@ -45,6 +44,7 @@ class Form extends Block {
             const result = this.getFormValues();
             if (!props.valid) {
               props.submit(result);
+              return;
             }
             const status = this.checkValidFields();
             if (status) {
@@ -92,14 +92,6 @@ class Form extends Block {
       return newSum;
     }, {});
     return result;
-  }
-
-  render() {
-    return form({
-      titleText: this.props.titleText,
-      button: this.props.button,
-      fields: this.props.fields,
-    });
   }
 }
 
