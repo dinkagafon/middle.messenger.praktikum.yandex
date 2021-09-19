@@ -1,0 +1,17 @@
+@import 'styles/mixins';
+@import 'styles/var';
+@import 'blocks';
+
+
+
+@import './styles/fonts.scss';
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #22262B;
+}

@@ -1,0 +1,10 @@
+include ../formFooter/formFooter
+
+mixin startLinks()
+    .startLinks 
+        +formFooter('Ошибка 500', "./500.pug",  'Перейти')
+        +formFooter('Ошибка 404', "./404.pug",  'Перейти')
+        +formFooter('Регистрация', "./reg.pug",  'Перейти')
+        +formFooter('Авторизация', "./auth.pug",  'Перейти')
+        +formFooter('Профиль', "./profile.pug",  'Перейти')
+        +formFooter('Список чатов и лента переписки', "./#",  'В разработке')

@@ -1,0 +1,13 @@
+.formFooter{
+    &_text{
+        @include text-regular;
+        color: var(--text-disable)
+    }
+    &_link{
+        text-decoration: none;
+        border-bottom: 1px solid var(--text-basic);
+        margin-left: 6px;
+        @include text-regular;
+        color: var(--text-basic)
+    }
+}
