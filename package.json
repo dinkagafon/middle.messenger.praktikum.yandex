@@ -5,9 +5,9 @@
   "license": "MIT",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "./node_modules/.bin/parcel static/index.html",
+    "dev": "parcel static/pages/*.html",
     "start": "node ./server.js",
-    "build": "./node_modules/.bin/parcel build static/pages/*.html --dist-dir build",
+    "build": "parcel build static/pages/*.html --dist-dir build",
     "lint": "node_modules/.bin/eslint .",
     "slint": "stylelint src/*.scss"
   },
