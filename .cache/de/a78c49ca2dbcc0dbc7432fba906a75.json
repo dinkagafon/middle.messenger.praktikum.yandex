@@ -1,1 +1,0 @@
-{"id":"../src/components/ChatWindow/chatWindow.pug","dependencies":[],"generated":{"html":"<div class=\"chat-window__header\"> <div class=\"chat-window__profile\"> </div></div><div class=\"chat-window__messeges\"></div><div class=\"chat-window__input\"></div>"},"sourceMaps":null,"error":null,"hash":"51457e469efbb523d9c4996e00779cbc","cacheData":{}}
