@@ -4,7 +4,7 @@
   "author": "dinkagafon <agafonikita@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel static/pages/*.html",
+    "dev": "parcel static/index.html",
     "start": "node ./server.js",
     "build": "parcel build src/index.html --dist-dir build",
     "lint": "node_modules/.bin/eslint .",

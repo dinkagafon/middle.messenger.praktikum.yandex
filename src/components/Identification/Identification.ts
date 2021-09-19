@@ -7,7 +7,7 @@ class Identification extends Block {
   constructor(props: {
     title: string,
     form: MainForm,
-    helper: Helper,
+    helper?: Helper,
   }) {
     super('div', {}, {
       title: props.title,

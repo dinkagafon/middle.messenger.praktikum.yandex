@@ -28,6 +28,11 @@ export default class AuthPage extends Block {
             type: 'text',
             validFunc: (value: string) => /^(?=.*[a-zA-Z_-])[a-zA-Z0-9-_]{3,20}$/.test(value),
           }, {
+            placeholder: 'Почта',
+            name: 'email',
+            type: 'text',
+            validFunc: (value: string) => /^(?=.*[a-zA-Z_@-])[a-zA-Z_@-]+@[a-zA-Z_-]+\.[a-zA-Z_-]+$/.test(value),
+          }, {
             placeholder: 'Телефон',
             name: 'phone',
             type: 'text',

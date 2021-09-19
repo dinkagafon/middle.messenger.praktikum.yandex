@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { v4 as makeUUID } from 'uuid';
 import Attrs from '../types/Attrs';
 import Events from '../types/Events';
@@ -194,6 +196,6 @@ class Block {
   // eslint-disable-next-line class-methods-use-this
   public componentDidMount() {}
 
-  public componentDidUpdate(oldProps: Props, _newProps: Props) {}
+  public componentDidUpdate(_oldProps: Props, _newProps: Props) {}
 }
 export default Block;

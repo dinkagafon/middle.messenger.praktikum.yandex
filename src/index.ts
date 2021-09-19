@@ -1,6 +1,9 @@
 import Reg from './pages/reg/Reg';
 import Auth from './pages/auth/Auth';
 import Chat from './pages/chat/Chat';
+import Error404 from './pages/404';
+import Error500 from './pages/500';
+import Profile from './pages/profile';
 
 document.addEventListener('DOMContentLoaded', () => {
   function render(query: string) {
@@ -23,8 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
       case '/chat':
         page = new Chat();
         break;
+      case '/profile':
+        page = new Profile();
+        break;
+      case '/500':
+        page = new Error500();
+        break;
       default:
-        page = new Auth();
+        page = new Error404();
         break;
     }
     root.appendChild(page.element);
