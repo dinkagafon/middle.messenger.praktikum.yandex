@@ -47,6 +47,7 @@ export default class Profile extends Block {
             validFunc: (value: string) => /^(?=.*[A-ZА-Я])(?=.*\d).{8,40}$/.test(value),
           }],
           submit: (formObj: Record<string, string>) => {
+            // eslint-disable-next-line no-console
             console.log(formObj);
           },
         }),

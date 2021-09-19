@@ -22,12 +22,13 @@ export default class AuthPage extends Block {
             type: 'password',
           }],
           submit: (formObj: Record<string, string>) => {
+            // eslint-disable-next-line no-console
             console.log(formObj);
           },
         }),
         helper: new Helper({
           text: 'Нет аккаунта?',
-          link: '/reg',
+          link: '/reg.html',
           textLink: 'Регистрация',
         }),
       }),

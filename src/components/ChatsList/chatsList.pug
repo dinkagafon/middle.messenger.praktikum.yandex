@@ -1,7 +1,7 @@
 .chat-list__search
   | !{search}
 .chat-list__bar
-  each val in chats 
+  each val in chats ? chats : ['There are no values']  
     | !{val}
 .chat-list__profile 
   | !{profile}

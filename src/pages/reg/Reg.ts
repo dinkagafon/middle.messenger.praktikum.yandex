@@ -49,7 +49,7 @@ export default class AuthPage extends Block {
         }),
         helper: new Helper({
           text: 'Уже есть аккаунт?',
-          link: '/auth',
+          link: '/auth.html',
           textLink: 'Вход',
         }),
       }),

@@ -1,9 +1,5 @@
 node_modules
-<<<<<<< HEAD
 build
 dist
 .parcel-cache
 .github
-=======
-dist
->>>>>>> deploy

@@ -17,19 +17,19 @@ document.addEventListener('DOMContentLoaded', () => {
       case '/':
         page = new Reg();
         break;
-      case '/reg':
+      case '/reg.html':
         page = new Reg();
         break;
-      case '/auth':
+      case '/auth.html':
         page = new Auth();
         break;
-      case '/chat':
+      case '/chat.html':
         page = new Chat();
         break;
-      case '/profile':
+      case '/profile.html':
         page = new Profile();
         break;
-      case '/500':
+      case '/500.html':
         page = new Error500();
         break;
       default:
