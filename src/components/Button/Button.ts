@@ -1,4 +1,4 @@
-import Events from '../../types/Events';
+import BlockEvent from '../../types/BlockEvent';
 import Block from '../../utils/Block';
 import button from './button.pug';
 
@@ -6,12 +6,16 @@ class Button extends Block {
   constructor(props: {
     fullWidth?: boolean,
     text: string,
-    events: Events,
+    onclick: BlockEvent,
+    theme?: 'link'
   }) {
     super('button', {}, {
       fullWidth: props.fullWidth,
       text: props.text,
-      events: props.events,
+      theme: props.theme,
+      events: {
+        click: props.onclick,
+      },
     });
   }
 
@@ -19,6 +23,9 @@ class Button extends Block {
     let baseClass = 'button';
     if (this.props.fullWidth) {
       baseClass = `${baseClass} button_fullWidth`;
+    }
+    if (this.props.theme) {
+      baseClass = `${baseClass} button_theme_${this.props.theme}`;
     }
     this.attrs.class = baseClass;
   }

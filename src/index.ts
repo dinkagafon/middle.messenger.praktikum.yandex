@@ -1,17 +1,24 @@
 import Reg from './pages/reg/Reg';
 import Auth from './pages/auth/Auth';
 import Chat from './pages/chat/Chat';
-import Error404 from './pages/404';
-import Error500 from './pages/500';
 import Profile from './pages/profile';
+import Router from './utils/Router';
 
 document.addEventListener('DOMContentLoaded', () => {
   function render(query: string) {
-    const root = document.querySelector(query);
+    const root = document.querySelector(query) as HTMLElement;
     if (root === null) {
       return;
     }
-    let page;
+    const router = new Router(root);
+    router
+      .use('/', Chat)
+      .use('/auth', Auth)
+      .use('/reg', Reg)
+      .use('/profile', Profile)
+      .start();
+  }
+  /* let page;
     const path = window.location.pathname;
     switch (path) {
       case '/':
@@ -36,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         page = new Error404();
         break;
     }
-    root.appendChild(page.element);
-  }
+    root.appendChild(page.element); */
+
   render('.root');
 });

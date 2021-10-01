@@ -3,10 +3,10 @@ import Helper from '../Helper';
 import MainForm from '../MainForm';
 import identification from './identification.pug';
 
-class Identification extends Block {
+class Identification<Fields> extends Block {
   constructor(props: {
     title: string,
-    form: MainForm,
+    form: MainForm<Fields>,
     helper?: Helper,
   }) {
     super('div', {}, {

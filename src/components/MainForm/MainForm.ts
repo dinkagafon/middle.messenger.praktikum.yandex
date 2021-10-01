@@ -1,7 +1,7 @@
 import Form from '../Form';
 import mainForm from './mainForm.pug';
 
-class MainForm extends Form {
+class MainForm<Fields> extends Form<Fields> {
   constructor(props: {
     fields: Array<{
       placeholder: string,
@@ -11,7 +11,7 @@ class MainForm extends Form {
     }>,
     buttonText: string,
     valid?: boolean
-    submit: (formObj: Record<string, string>) => void,
+    submit: (formObj: Fields) => void,
   }) {
     super({
       fields: props.fields,

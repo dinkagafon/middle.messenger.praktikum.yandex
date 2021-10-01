@@ -2,6 +2,10 @@ import Block from '../../utils/Block';
 import profile from './profile.pug';
 import MainForm from '../../components/MainForm';
 import Identification from '../../components/Identification';
+import Helper from '../../components/Helper';
+import AuthService from '../../services/AuthService';
+
+const authService = new AuthService();
 
 export default class Profile extends Block {
   constructor() {
@@ -50,6 +54,13 @@ export default class Profile extends Block {
             // eslint-disable-next-line no-console
             console.log(formObj);
           },
+        }),
+        helper: new Helper({
+          text: '',
+          onclick: async () => {
+            await authService.logout();
+          },
+          textLink: 'Выйти',
         }),
       }),
     });

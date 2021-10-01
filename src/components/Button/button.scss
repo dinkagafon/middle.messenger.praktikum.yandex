@@ -22,4 +22,10 @@
       background-color: var(--UI-accent-basic);
     }
   }
+  &_theme_link {
+    @include text-regular;
+    background: none;
+    border-bottom: 1px solid var(--text-basic);
+    padding: 0;
+  }
 }

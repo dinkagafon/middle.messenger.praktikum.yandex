@@ -2,7 +2,7 @@ import Block from '../../utils/Block';
 import Button from '../Button';
 import Input from '../Input';
 
-class Form extends Block {
+class Form<Fields> extends Block {
   constructor(props: {
     fields: Array<{
       placeholder: string,
@@ -12,7 +12,7 @@ class Form extends Block {
     }>,
     buttonText: string,
     valid?: boolean
-    submit: (formObj: Record<string, string>) => void,
+    submit: (formObj: Fields) => void,
   }) {
     const fieldsArray: Array<Input> = props.fields
       .map((f) => new Input({
@@ -39,18 +39,16 @@ class Form extends Block {
       button: new Button({
         text: props.buttonText,
         fullWidth: true,
-        events: {
-          click: () => {
-            const result = this.getFormValues();
-            if (!props.valid) {
-              props.submit(result);
-              return;
-            }
-            const status = this.checkValidFields();
-            if (status) {
-              props.submit(result);
-            }
-          },
+        onclick: () => {
+          const result = this.getFormValues();
+          if (!props.valid) {
+            props.submit(result);
+            return;
+          }
+          const status = this.checkValidFields();
+          if (status) {
+            props.submit(result);
+          }
         },
       }),
     });
