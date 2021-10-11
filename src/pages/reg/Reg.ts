@@ -3,6 +3,9 @@ import reg from './reg.pug';
 import MainForm from '../../components/MainForm';
 import Identification from '../../components/Identification';
 import Helper from '../../components/Helper';
+import Router from '../../utils/Router';
+import AuthService from '../../services/AuthService';
+import { UserForReg } from '../../types/User';
 
 export default class AuthPage extends Block {
   constructor() {
@@ -43,15 +46,17 @@ export default class AuthPage extends Block {
             type: 'password',
             validFunc: (value: string) => /^(?=.*[A-ZА-Я])(?=.*\d).{8,40}$/.test(value),
           }],
-          submit: (formObj: Record<string, string>) => {
-            // eslint-disable-next-line no-console
-            console.log(formObj);
+          submit: (formObj: UserForReg) => {
+            const serv = new AuthService()
+            serv.reg(formObj)
           },
         }),
         helper: new Helper({
-          text: 'Уже есть аккаунт?',
-          link: '/auth.html',
-          textLink: 'Вход',
+          text: 'Нет аккаунта?',
+          onclick: () => {
+            (new Router()).go('/auth');
+          },
+          textLink: 'Регистрация',
         }),
       }),
     });

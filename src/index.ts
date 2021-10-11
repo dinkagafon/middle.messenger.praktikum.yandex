@@ -3,6 +3,7 @@ import Auth from './pages/auth/Auth';
 import Chat from './pages/chat/Chat';
 import Profile from './pages/profile';
 import Router from './utils/Router';
+import createStore from './store/createStore';
 
 document.addEventListener('DOMContentLoaded', () => {
   function render(query: string) {
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (root === null) {
       return;
     }
+    createStore()
     const router = new Router(root);
     router
       .use('/', Chat)

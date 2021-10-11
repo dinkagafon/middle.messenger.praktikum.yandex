@@ -19,7 +19,7 @@ class HTTP {
     headers?: { [index: string]: string }
   } = {}) {
     this.startUrl = startUrl;
-    this.timeout = options.timeout || 1000;
+    this.timeout = options.timeout || 10000;
     this.headers = options.headers || {};
   }
 

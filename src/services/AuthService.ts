@@ -1,5 +1,6 @@
 import AuthAPI from '../api/auth-api';
 import LoginRequest from '../types/LoginRequest';
+import { UserForReg } from '../types/User';
 import Router from '../utils/Router';
 
 class AuthService {
@@ -24,6 +25,15 @@ class AuthService {
       (new Router()).go('/auth');
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  public async reg(data: UserForReg) {
+    try {
+      await this.api.create(data);
+
+    } catch (err) {
+      console.log(err)
     }
   }
 }
