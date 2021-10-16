@@ -1,4 +1,4 @@
-import Chat from '../pages/chat';
+import Chat from '../types/Chat';
 import BaseAPI from '../utils/base-api';
 import HTTP from '../utils/HTTP';
 
@@ -9,8 +9,12 @@ class ChatsAPI extends BaseAPI {
     return chatsAPIInstance.get<Array<Chat>>('/');
   }
 
-  public create(data: {title: string}) {
-    return chatsAPIInstance.post<{title: string}, {id: number}>('/', data)
+  public create(data: { title: string }) {
+    return chatsAPIInstance.post<{ title: string }, { id: number }>('/', data);
+  }
+
+  public token(chatId: number) {
+    return chatsAPIInstance.post<undefined, { token: string }>(`/token/${chatId}`);
   }
 
   update: undefined;

@@ -1,0 +1,8 @@
+.create-chat {
+  &_title {
+    @include text-header;
+    color: var(--text-basic);
+    display: flex;
+    justify-content: start;
+  }
+}

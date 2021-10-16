@@ -11,8 +11,11 @@
 @import "./components/ProfileButton/profileButton";
 @import "./components/ChatWindow/chatWindow";
 @import "./components/PopUp/popUp";
+@import "./components/ChatSettings/chatSettings";
+@import "./components/Accordance/accordance";
 @import "./templates/centering/centering";
 @import "./pages/chat/chat";
+@import "./components/CreateChat/createChat";
 * {
   box-sizing: border-box;
   margin: 0;

@@ -11,25 +11,29 @@ class Button extends Block {
     super('div', {}, {
       content: props.content,
       events: {
-        click: props.disableFunc,
+        mousedown: (e) => {
+          if (e.target === e.currentTarget) {
+            props.disableFunc();
+          }
+        },
       },
-      active: props.active
+      active: props.active,
     });
   }
 
   setClass() {
-    let baseClass = 'popUp';
+    let baseClass = 'pop-up';
     if (this.props.active) {
-      baseClass = `${baseClass} popUp_active`;
+      baseClass = `${baseClass} pop-up_active`;
     } else {
-      baseClass = `${baseClass} popUp_disable`;
+      baseClass = `${baseClass} pop-up_disable`;
     }
 
     this.attrs.class = baseClass;
   }
 
   render() {
-    this.setClass()
+    this.setClass();
     return popUp(this.props);
   }
 }

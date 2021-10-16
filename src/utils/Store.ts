@@ -1,50 +1,51 @@
-import Action from "../types/Action"
-import Listener from "./Listener"
-import Reducer from "./Reducer"
+import Action from '../types/Action';
+import Listener from './Listener';
+import Reducer from './Reducer';
 
 class Store {
-    private state: Indexed = {}
+  private state: Indexed = {};
 
-    private listeners: Array<Listener> = []
+  private listeners: Array<Listener> = [];
 
-    private reducers: {
-        [index: string]: Reducer
-    } = {}
+  private reducers: {
+    [index: string]: Reducer
+  } = {};
 
-    public addReducer(name: string, reducer: Reducer){
-        this.reducers[name] = reducer
+  public addReducer(name: string, reducer: Reducer) {
+    this.reducers[name] = reducer;
 
-        this.dispatch({
-            type: '@@INIT'
-        })
-        return this
-    }
+    this.dispatch({
+      type: '@@INIT',
+    });
+    return this;
+  }
 
-    public getState(){
-        return this.state
-    }
+  public getState() {
+    return this.state;
+  }
 
-    public dispatch(action: Action){
-        this.state = this.reducer(action)
+  public dispatch(action: Action) {
+    this.state = this.reducer(action);
 
-        this.emitListeners()
-    }
+    this.emitListeners();
+  }
 
-    private emitListeners(){
-        this.listeners.forEach((listener) => listener(this.state))
-    }
-    public subscribe(listener: Listener){
-        listener(this.state)
-        this.listeners.push(listener)
-    }
+  private emitListeners() {
+    this.listeners.forEach((listener) => listener(this.state));
+  }
 
-    private reducer(action: Action){
-        const newState: Indexed = {}
-        Object.entries(this.reducers).forEach(([key, reducer]) => {
-            newState[key] = reducer(this.state[key], action)
-        })
+  public subscribe(listener: Listener) {
+    listener(this.state);
+    this.listeners.push(listener);
+  }
 
-        return newState
-    }
+  private reducer(action: Action) {
+    const newState: Indexed = {};
+    Object.entries(this.reducers).forEach(([key, reducer]) => {
+      newState[key] = reducer(this.state[key], action);
+    });
+
+    return newState;
+  }
 }
-export default new Store;
+export default new Store();

@@ -1,9 +1,6 @@
-const setActiveChatId = (id: number) => {
+const setActiveChatId = (id: number) => ({
+  type: 'currentChat/SETACTIVECHATID',
+  payload: id,
+});
 
-    return {
-        type: 'currentChat/SETACTIVECHATID',
-        payload: id
-    }
-}
-
-export default setActiveChatId
+export default setActiveChatId;

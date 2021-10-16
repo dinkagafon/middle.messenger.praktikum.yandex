@@ -1,3 +1,3 @@
 type Indexed = {
-    [index: string]: any
-}
+  [index: string]: any
+};

@@ -5,8 +5,6 @@ import Identification from '../../components/Identification';
 import Helper from '../../components/Helper';
 import AuthService from '../../services/AuthService';
 
-const authService = new AuthService();
-
 export default class Profile extends Block {
   constructor() {
     super('div', {}, {
@@ -58,7 +56,7 @@ export default class Profile extends Block {
         helper: new Helper({
           text: '',
           onclick: async () => {
-            await authService.logout();
+            await AuthService.logout();
           },
           textLink: 'Выйти',
         }),

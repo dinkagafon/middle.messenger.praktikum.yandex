@@ -1,7 +1,5 @@
-import Chat from "../../types/Chat"
+import Chat from '../../types/Chat';
 
-const selectChats = (state: Indexed ) => {
-    return state.chats as Array<Chat>
-}
+const selectChats = (state: Indexed) => state.chats as Array<Chat>;
 
-export default selectChats
+export default selectChats;

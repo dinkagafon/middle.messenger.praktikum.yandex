@@ -1,7 +1,9 @@
 import AuthAPI from '../api/auth-api';
+import setProfile from '../store/actrionCreaters/setProfile';
 import LoginRequest from '../types/LoginRequest';
 import { UserForReg } from '../types/User';
 import Router from '../utils/Router';
+import Store from '../utils/Store';
 
 class AuthService {
   private api: AuthAPI;
@@ -31,11 +33,19 @@ class AuthService {
   public async reg(data: UserForReg) {
     try {
       await this.api.create(data);
-
     } catch (err) {
-      console.log(err)
+      console.log(err);
+    }
+  }
+
+  public async getProfile() {
+    try {
+      const user = await this.api.request();
+      Store.dispatch(setProfile(user));
+    } catch (err) {
+      console.log(err);
     }
   }
 }
 
-export default AuthService;
+export default new AuthService();

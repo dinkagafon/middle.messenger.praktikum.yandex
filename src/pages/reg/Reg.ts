@@ -47,8 +47,7 @@ export default class AuthPage extends Block {
             validFunc: (value: string) => /^(?=.*[A-ZА-Я])(?=.*\d).{8,40}$/.test(value),
           }],
           submit: (formObj: UserForReg) => {
-            const serv = new AuthService()
-            serv.reg(formObj)
+            AuthService.reg(formObj);
           },
         }),
         helper: new Helper({

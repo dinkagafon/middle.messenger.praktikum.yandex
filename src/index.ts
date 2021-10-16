@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (root === null) {
       return;
     }
-    createStore()
+    createStore();
     const router = new Router(root);
     router
       .use('/', Chat)

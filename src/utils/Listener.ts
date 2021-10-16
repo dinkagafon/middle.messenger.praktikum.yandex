@@ -1,3 +1,3 @@
-type Listener = (store: Indexed) => void
+type Listener = (store: Indexed) => void;
 
-export default Listener
+export default Listener;

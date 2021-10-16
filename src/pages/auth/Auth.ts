@@ -7,8 +7,6 @@ import AuthService from '../../services/AuthService';
 import LoginRequest from '../../types/LoginRequest';
 import Router from '../../utils/Router';
 
-const authService = new AuthService();
-
 export default class AuthPage extends Block {
   constructor() {
     super('div', {}, {
@@ -27,7 +25,7 @@ export default class AuthPage extends Block {
             type: 'password',
           }],
           submit: async (formObj) => {
-            await authService.login(formObj);
+            await AuthService.login(formObj);
           },
         }),
         helper: new Helper({

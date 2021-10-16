@@ -1,5 +1,5 @@
 type Events = {
-  [index: string]: (e: MouseEvent, comp?: object) => void
+  [index: string]: (e: Event, comp?: object) => void
 };
 
 export default Events;

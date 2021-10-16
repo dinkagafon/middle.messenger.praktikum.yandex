@@ -3,12 +3,10 @@ import ProfileButton from '../ProfileButton';
 import chatWindow from './chatWindow.pug';
 import imageURL from '../../../static/img/avatar.jpg';
 import Input from '../Input';
-import PopUp from '../PopUp';
 import Button from '../Button';
 import Store from '../../utils/Store';
-import setChatSettingsDisable from '../../store/actrionCreaters/setChatSettingsDisable';
-import selectChatSettingVisible from '../../store/selectors/selectChatSettingVisible';
-import setChatSettingsActive from '../../store/actrionCreaters/setChatSettingsActive';
+import selectActiveChat from '../../store/selectors/selectActiveChat';
+import setChatSettingsPopUpActive from '../../store/actrionCreaters/setChatSettingsPopUpActive';
 
 class ChatWindow extends Block {
   constructor() {
@@ -21,24 +19,14 @@ class ChatWindow extends Block {
       chatSettingsButton: new Button({
         text: 'Настройки',
         onclick: () => {
-          Store.dispatch(setChatSettingsActive())
-        }
+          Store.dispatch(setChatSettingsPopUpActive());
+        },
       }),
       input: new Input({
         placeholder: 'Напишите сообщение',
         name: 'message',
         type: 'text',
       }),
-      chatSettings: new PopUp({
-        disableFunc: () => {
-          Store.dispatch(setChatSettingsDisable())
-        },
-        content: new Button({
-          text: 'PopUP',
-          onclick: () => {console.log('dsfsf')}
-        }),
-        active: true,
-      })
     });
   }
 
@@ -47,15 +35,18 @@ class ChatWindow extends Block {
     this.attrs.class = baseClass;
   }
 
-
   componentDidMount() {
     Store.subscribe((state) => {
-      this.props.chatSettings.setProps({      
-        active: selectChatSettingVisible(state)
-      })
-    })
+      const chat = selectActiveChat(state);
+      if (!chat) {
+        return;
+      }
+      this.props.profile.setProps({
+        avatar: chat.avatar,
+        name: chat.title,
+      });
+    });
   }
-
 
   render() {
     this.setClass();

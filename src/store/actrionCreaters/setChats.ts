@@ -1,10 +1,8 @@
-import Chat from "../../pages/chat"
+import Chat from '../../types/Chat';
 
-const setChats = (chats: Array<Chat>) => {
-    return {
-        type: 'chats/SET',
-        payload: chats
-    }
-}
+const setChats = (chats: Array<Chat>) => ({
+  type: 'chats/SET',
+  payload: chats,
+});
 
-export default setChats
+export default setChats;
