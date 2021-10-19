@@ -15,7 +15,19 @@ const chatsReducer: Reducer<Array<Chat>> = (state = [], action) => {
         }
         return { ...chat };
       });
-    case 'chats/ADDMESSAGES':
+    case 'chats/ADDNEWMESSAGES':
+      return state.map((chat: Chat) => {
+        if (chat.id === action.payload.chatId) {
+          return {
+            ...chat,
+            messages: chat.messages
+              ? action.payload.messages.concat(chat.messages)
+              : action.payload.messages,
+          };
+        }
+        return { ...chat };
+      });
+    case 'chats/ADDOLDMESSAGES':
       return state.map((chat: Chat) => {
         if (chat.id === action.payload.chatId) {
           return {

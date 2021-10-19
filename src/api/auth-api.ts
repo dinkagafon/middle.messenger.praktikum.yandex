@@ -1,5 +1,5 @@
 import LoginRequest from '../types/LoginRequest';
-import { User, UserForReg } from '../types/User';
+import { Profile, RegUser } from '../types/User';
 import BaseAPI from '../utils/base-api';
 import HTTP from '../utils/HTTP';
 
@@ -14,12 +14,12 @@ class AuthAPI extends BaseAPI {
     return authAPIInstance.post<void, void>('/logout');
   }
 
-  public create(user: UserForReg) {
-    return authAPIInstance.post<UserForReg, { id: number }>('/signup', user);
+  public create(user: RegUser) {
+    return authAPIInstance.post<RegUser, { id: number }>('/signup', user);
   }
 
   public request() {
-    return authAPIInstance.get<User>('/user');
+    return authAPIInstance.get<Profile>('/user');
   }
 
   update: undefined;

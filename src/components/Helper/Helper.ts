@@ -13,7 +13,7 @@ class Helper extends Block {
       text: props.text,
       link: new Button({
         onclick: props.onclick,
-        text: props.textLink,
+        content: props.textLink,
         theme: 'link',
       }),
     });

@@ -1,0 +1,32 @@
+.message {
+  background-color: var(--UI-accent-light);
+  border-radius: 10px 10px 10px 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  max-width: 430px;
+  padding: 10px 15px 0;
+  width: min-content;
+  &_content {
+    @include text-big;
+    color: var(--text-basic);
+    flex-grow: 1;
+    max-width: 100%;
+    min-width: 100px;
+    width: max-content;
+  }
+  &_footer {
+    align-items: center;
+    display: flex;
+    height: 30px;
+    justify-content: space-between;
+    width: 100%;
+  }
+  &_date {
+    @include text-regular;
+    color: var(--text-light);
+  }
+  &__self {
+    background-color: var(--UI-back-light);
+  }
+}

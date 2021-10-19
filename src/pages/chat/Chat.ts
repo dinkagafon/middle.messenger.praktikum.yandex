@@ -1,7 +1,6 @@
 import ChatsList from '../../components/ChatsList';
 import Block from '../../utils/Block';
 import chat from './chat.pug';
-import Input from '../../components/Input';
 import ChatWindow from '../../components/ChatWindow';
 import PopUp from '../../components/PopUp';
 import Store from '../../utils/Store';
@@ -18,14 +17,7 @@ import ChatsService from '../../services/ChatsService';
 export default class Chat extends Block {
   constructor() {
     super('div', {}, {
-      chatList: new ChatsList({
-        chats: [],
-        search: new Input({
-          placeholder: 'Поиск',
-          name: 'search',
-          type: 'text',
-        }),
-      }),
+      chatList: new ChatsList(),
       chatWindow: new ChatWindow(),
       chatNamePopUp: new PopUp({
         disableFunc: () => {
@@ -50,6 +42,8 @@ export default class Chat extends Block {
   }
 
   componentDidMount() {
+    AuthService.getProfile();
+    ChatsService.init();
     const memoizeCreateChat = memoize(
       (state) => selectCreateChatPopUpVisible(state),
       (data) => {
@@ -66,8 +60,6 @@ export default class Chat extends Block {
         });
       },
     );
-    AuthService.getProfile();
-    ChatsService.get();
     Store.subscribe((state) => {
       memoizeCreateChat(state);
       memoizeChatSetting(state);

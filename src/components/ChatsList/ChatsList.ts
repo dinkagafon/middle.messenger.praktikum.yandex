@@ -3,32 +3,45 @@ import ChatItem from '../ChatItem';
 import Input from '../Input';
 import ProfileButton from '../ProfileButton';
 import chatsList from './chatsList.pug';
-import imageURL from '../../../static/img/avatar.jpg';
-import Chat from '../../types/Chat';
 import Button from '../Button';
 import Store from '../../utils/Store';
 import selectChats from '../../store/selectors/selectChats';
 import setChatNamePopUpActive from '../../store/actrionCreaters/setChatNamePopUpActive';
 import memoize from '../../utils/memoize';
+import transformDate from '../../utils/transformDate';
+import selectProfile from '../../store/selectors/selectProfile';
+import ChatsBar from '../ChatBar';
 
 class ChatsList extends Block {
-  constructor(props: {
-    chats: Array<Chat>,
-    search: Input,
-  }) {
+  constructor() {
     super('div', {}, {
-      chats: [],
-      search: props.search,
+      chatBar: new ChatsBar(),
+      search: new Input({
+        placeholder: 'Поиск по чатам',
+        name: 'search',
+        type: 'text',
+        events: {
+          input: (e: KeyboardEvent) => {
+            if (!e.target) {
+              return;
+            }
+            const input = e.target as HTMLInputElement;
+            this.props.chatBar.setProps({
+              searchValue: input.value,
+            });
+          },
+        },
+      }),
       addChatButton: new Button({
-        text: 'Добавить чат',
+        content: 'Новый чат',
         onclick: () => {
           Store.dispatch(setChatNamePopUpActive());
         },
       }),
       profile: new ProfileButton({
-        avatar: imageURL,
+        avatar: '',
         link: '/profile',
-        name: 'Агафонов Никита',
+        name: '',
       }),
     });
   }
@@ -42,26 +55,41 @@ class ChatsList extends Block {
     const memoizeSelectChats = memoize(
       (state) => selectChats(state),
       (data) => {
-        this.setProps({
-          chats: data.map((c) => new ChatItem({
-            id: c.id,
-            author: c.title,
-            message: c.last_message ? c.last_message.content : 'Нет сообщений',
-            date: c.last_message ? c.last_message.time : '',
-            count: c.unread_count,
-            img: c.avatar,
-          })),
+        this.props.chatBar.setProps({
+          chats: data.map((c) => {
+            const lastMessege = c.messages ? c.messages[0] : c.last_message;
+            return new ChatItem({
+              id: c.id,
+              author: c.title,
+              message: lastMessege ? lastMessege.content : 'Пока нет сообщений',
+              date: lastMessege ? transformDate(lastMessege.time) : '',
+              count: c.unread_count,
+              img: c.avatar || '',
+            });
+          }),
+        });
+      },
+    );
+    const memoizeGetProfile = memoize(
+      (state) => selectProfile(state),
+      (profile) => {
+        if (!profile) {
+          return;
+        }
+        this.props.profile.setProps({
+          avatar: profile.avatar,
+          name: `${profile.first_name} ${profile.second_name}`,
         });
       },
     );
     Store.subscribe((state) => {
       memoizeSelectChats(state);
+      memoizeGetProfile(state);
     });
   }
 
   render() {
     this.setClass();
-
     return chatsList(this.props);
   }
 }

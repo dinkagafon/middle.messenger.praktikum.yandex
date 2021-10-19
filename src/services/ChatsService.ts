@@ -1,9 +1,10 @@
 import ChatsAPI from '../api/chats-api';
+import setActiveChatId from '../store/actrionCreaters/setActiveChatId';
 import setChatNamePopUpDisable from '../store/actrionCreaters/setChatNamePopUpDisable';
 import setChats from '../store/actrionCreaters/setChats';
+import selectChat from '../store/selectors/selectChat';
 import Store from '../utils/Store';
-import MembersService from './MembersService';
-import MessgesService from './MessgesService';
+import MessagesService from './MessagesService';
 
 class ChatsService {
   private api: ChatsAPI;
@@ -12,16 +13,28 @@ class ChatsService {
     this.api = new ChatsAPI();
   }
 
-  public async get() {
+  public async init() {
     try {
       const chats = await this.api.request();
       Store.dispatch(setChats(chats));
       chats.forEach((chat) => {
-        MembersService.get(chat.id);
-        MessgesService.connect(chat.id);
+        MessagesService.connect(chat.id);
       });
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  public async get(chatId: number) {
+    Store.dispatch(setActiveChatId(chatId));
+    const state = Store.getState();
+    const chat = selectChat(state, chatId);
+    if (!chat) {
+      return;
+    }
+    if (!chat.messages || chat.messages.length < 20) {
+      const offset = chat.messages ? chat.messages.length : 0;
+      MessagesService.getlastMessages(chatId, offset);
     }
   }
 
@@ -29,7 +42,7 @@ class ChatsService {
     try {
       await this.api.create(data);
       Store.dispatch(setChatNamePopUpDisable());
-      this.get();
+      this.init();
     } catch (err) {
       console.log(err);
     }

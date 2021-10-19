@@ -64,6 +64,10 @@ export default class Profile extends Block {
     });
   }
 
+  componentDidMount() {
+    AuthService.getProfile();
+  }
+
   render() {
     return profile({
       form: this.props.regForm,

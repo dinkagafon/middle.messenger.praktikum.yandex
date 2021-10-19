@@ -1,8 +1,6 @@
-.chat-settings {
-  &_header {
-    @include text-header;
-    color: var(--text-basic);
-    display: flex;
-    justify-content: start;
-  }
+.chat-settings-users {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
 }

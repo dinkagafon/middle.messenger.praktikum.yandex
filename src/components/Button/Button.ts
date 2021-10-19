@@ -5,13 +5,13 @@ import button from './button.pug';
 class Button extends Block {
   constructor(props: {
     fullWidth?: boolean,
-    text: string,
+    content: string | Block,
     onclick: BlockEvent,
-    theme?: 'link'
+    theme?: 'link' | 'icon',
   }) {
     super('button', {}, {
       fullWidth: props.fullWidth,
-      text: props.text,
+      content: props.content,
       theme: props.theme,
       events: {
         click: props.onclick,

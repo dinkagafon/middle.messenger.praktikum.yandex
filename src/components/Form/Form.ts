@@ -37,7 +37,7 @@ class Form<Fields> extends Block {
     super('div', {}, {
       fields: fieldsArray,
       button: new Button({
-        text: props.buttonText,
+        content: props.buttonText,
         fullWidth: true,
         onclick: () => {
           const result = this.getFormValues();

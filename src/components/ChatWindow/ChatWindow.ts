@@ -2,31 +2,30 @@ import Block from '../../utils/Block';
 import ProfileButton from '../ProfileButton';
 import chatWindow from './chatWindow.pug';
 import imageURL from '../../../static/img/avatar.jpg';
-import Input from '../Input';
 import Button from '../Button';
 import Store from '../../utils/Store';
 import selectActiveChat from '../../store/selectors/selectActiveChat';
-import setChatSettingsPopUpActive from '../../store/actrionCreaters/setChatSettingsPopUpActive';
+import CreateMessege from '../CreateMessege';
+import MessagesList from '../MessagesList';
+import MembersService from '../../services/MembersService';
+import Icon from '../Icon';
 
 class ChatWindow extends Block {
   constructor() {
     super('div', {}, {
       profile: new ProfileButton({
         avatar: imageURL,
-        link: '/profile',
-        name: 'Агафонов Никита',
+        name: '',
       }),
       chatSettingsButton: new Button({
-        text: 'Настройки',
-        onclick: () => {
-          Store.dispatch(setChatSettingsPopUpActive());
-        },
+        content: new Icon({
+          name: 'sliders',
+        }),
+        theme: 'icon',
+        onclick: () => MembersService.openMembersPopUp(),
       }),
-      input: new Input({
-        placeholder: 'Напишите сообщение',
-        name: 'message',
-        type: 'text',
-      }),
+      message: new CreateMessege(),
+      messagesList: new MessagesList(),
     });
   }
 

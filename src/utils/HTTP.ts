@@ -78,7 +78,11 @@ class HTTP {
 
       xhr.responseType = 'json';
       xhr.onload = () => {
-        resolve(xhr.response);
+        if (xhr.status < 400) {
+          resolve(xhr.response);
+        } else {
+          reject(xhr.response);
+        }
       };
 
       xhr.onabort = reject;

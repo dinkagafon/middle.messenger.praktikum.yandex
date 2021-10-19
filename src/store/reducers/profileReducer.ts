@@ -1,6 +1,7 @@
+import { Profile } from '../../types/User';
 import Reducer from '../../utils/Reducer';
 
-const profileReducer: Reducer = (
+const profileReducer: Reducer<Profile | undefined> = (
   state = undefined,
   action,
 ) => {

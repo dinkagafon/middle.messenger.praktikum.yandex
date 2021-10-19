@@ -16,6 +16,9 @@
   &_fullWidth {
     width: 100%;
   }
+  &_fullHeight {
+    height: 100%;
+  }
   &_wrong {
     outline: 1px solid var(--UI-input-danger);
   }

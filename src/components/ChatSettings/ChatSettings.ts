@@ -1,11 +1,14 @@
 import UsersService from '../../services/UsersService';
 import selectActiveChat from '../../store/selectors/selectActiveChat';
+import selectMembersWithUsers from '../../store/selectors/selectMembersWithUsers';
 import Block from '../../utils/Block';
 import memoize from '../../utils/memoize';
 import Store from '../../utils/Store';
 import ChatSettingsUsers from '../ChatSettingsUsers';
 import Input from '../Input';
 import chatSettings from './chatSettings.pug';
+import checkChatRoot from '../../store/selectors/checkChatRoot';
+import MemberItom from '../MemberItom';
 
 class ChatSettings extends Block {
   constructor() {
@@ -22,6 +25,7 @@ class ChatSettings extends Block {
               return;
             }
             const input = e.target as HTMLInputElement;
+            this.props.members.setProps({ searchValue: input.value });
             UsersService.search(input.value);
           },
         },
@@ -46,8 +50,20 @@ class ChatSettings extends Block {
         });
       },
     );
+    const memoizeUsers = memoize(
+      (state) => ({
+        members: selectMembersWithUsers(state),
+        root: checkChatRoot(state),
+      }),
+      ({ members, root }) => {
+        this.props.members.setProps({
+          members: members.map((member) => new MemberItom({ root, member })),
+        });
+      },
+    );
     Store.subscribe((state) => {
       memoizeSetTitle(state);
+      memoizeUsers(state);
     });
   }
 

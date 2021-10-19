@@ -1,5 +1,5 @@
-import { User } from '../../types/User';
+import { Profile } from '../../types/User';
 
-const selectProfile = (state: Indexed) => state.profile as User;
+const selectProfile = (state: Indexed) => state.profile as Profile | undefined;
 
 export default selectProfile;

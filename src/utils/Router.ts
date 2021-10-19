@@ -4,18 +4,18 @@ import Route from './Route';
 class Router {
   private currentRoot: HTMLElement;
 
-  private static instance: Router;
+  public static instance: Router | undefined;
 
-  private routes: Array<Route>;
+  public routes: Array<Route>;
 
   private history: History;
 
-  constructor(currentRoot?: HTMLElement) {
+  constructor(currentRoot: HTMLElement) {
     if (Router.instance) {
       return Router.instance;
     }
     if (!currentRoot) {
-      return Router.instance;
+      throw Error('undefind root node');
     }
     this.routes = [];
     this.history = window.history;

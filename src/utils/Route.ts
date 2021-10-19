@@ -1,7 +1,7 @@
 import Block from './Block';
 
 class Route {
-  private pathname: string;
+  public pathname: string;
 
   private BlockClass: typeof Block;
 

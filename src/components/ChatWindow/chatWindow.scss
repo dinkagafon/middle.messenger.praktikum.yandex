@@ -4,13 +4,15 @@
   flex-grow: 1;
   position: relative;
   &__header {
+    align-items: center;
     display: flex;
-    flex-grow: 1;
   }
   &__settings-button {
     margin-left: auto;
+    margin-right: 20px;
   }
   &__messeges {
     flex-grow: 1;
+    height: 0; // Работает только в таком случае и я не понимаю почему(
   }
 }

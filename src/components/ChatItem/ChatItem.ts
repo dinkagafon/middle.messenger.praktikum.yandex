@@ -1,4 +1,4 @@
-import setActiveChatId from '../../store/actrionCreaters/setActiveChatId';
+import ChatsService from '../../services/ChatsService';
 import selectActiveChat from '../../store/selectors/selectActiveChat';
 import Block from '../../utils/Block';
 import memoize from '../../utils/memoize';
@@ -24,7 +24,7 @@ class ChatItem extends Block {
       active: false,
       events: {
         click: () => {
-          Store.dispatch(setActiveChatId(this.props.id));
+          ChatsService.get(this.props.id);
         },
       },
     });
