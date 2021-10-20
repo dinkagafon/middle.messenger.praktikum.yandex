@@ -1,0 +1,11 @@
+.chat-list {
+  background-color: var(--UI-back-light);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: static;
+  width: 400px;
+  &__profile {
+    margin-top: auto;
+  }
+}

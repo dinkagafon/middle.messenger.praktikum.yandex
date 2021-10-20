@@ -1,0 +1,69 @@
+.chat-item {
+  cursor: pointer;
+  display: flex;
+  height: 60px;
+  padding: 8px 16px;
+  width: 100%;
+  &:hover {
+    background-color: var(--UI-button-basic);
+  }
+  &__main {
+    display: flex;
+    flex-basis: 100%;
+    overflow: hidden;
+  }
+  &__img-container {
+    border-radius: 10px;
+    flex-shrink: 0;
+    height: 46px;
+    overflow: hidden;
+    width: 46px;
+  }
+  &__img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 16px;
+    overflow: hidden;
+  }
+  &__author {
+    @include text-medium;
+    color: var(--text-disable);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__message {
+    @include text-big;
+    color: var(--text-basic);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__meta {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 14px;
+  }
+  &__count {
+    height: 20px;
+  }
+  &__count-text {
+    @include text-regular;
+    background-color: var(--UI-back-input);
+    border-radius: 10px;
+    color: var(--text-basic);
+    padding: 2px 6px;
+  }
+  &__date {
+    @include text-regular;
+    color: var(--text-basic);
+  }
+}

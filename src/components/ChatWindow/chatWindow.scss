@@ -1,0 +1,8 @@
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  &__messeges {
+    flex-grow: 1;
+  }
+}

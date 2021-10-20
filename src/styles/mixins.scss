@@ -1,24 +1,40 @@
 @mixin text-medium {
-    font: {
-      family: Roboto;
-      size: 14px;
-      weight: 500;
-    }
-    line-height: 110%;
+  line-height: 110%;
+  font: {
+    family: Roboto;
+    size: 14px;
+    weight: 500;
+  }
 }
 @mixin text-regular {
+  line-height: 110%;
   font: {
     family: Roboto;
     size: 14px;
     weight: 400;
   }
-  line-height: 110%;
 }
 @mixin text-header {
+  line-height: 110%;
   font: {
     family: Roboto;
     size: 20px;
     weight: 300;
   }
+}
+@mixin text-header2 {
   line-height: 110%;
+  font: {
+    family: Roboto;
+    size: 18px;
+    weight: 400;
+  }
+}
+@mixin text-big {
+  line-height: 110%;
+  font: {
+    family: Roboto;
+    size: 16px;
+    weight: 400;
+  }
 }

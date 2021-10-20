@@ -1,0 +1,16 @@
+{
+  "extends": ["stylelint-config-sass-guidelines", "stylelint-prettier/recommended"],
+  "rules": {
+    "max-nesting-depth": [
+      2,
+      {
+        "ignoreAtRules": [
+          "each",
+          "media",
+          "supports",
+          "include"
+        ]
+      }
+    ]
+  }
+}
