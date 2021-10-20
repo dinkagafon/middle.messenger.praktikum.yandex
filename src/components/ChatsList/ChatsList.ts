@@ -11,6 +11,7 @@ import memoize from '../../utils/memoize';
 import transformDate from '../../utils/transformDate';
 import selectProfile from '../../store/selectors/selectProfile';
 import ChatsBar from '../ChatBar';
+import getAvatar from '../../utils/getAvatar';
 
 class ChatsList extends Block {
   constructor() {
@@ -64,7 +65,7 @@ class ChatsList extends Block {
               message: lastMessege ? lastMessege.content : 'Пока нет сообщений',
               date: lastMessege ? transformDate(lastMessege.time) : '',
               count: c.unread_count,
-              img: c.avatar || '',
+              img: getAvatar(c.avatar),
             });
           }),
         });
@@ -77,7 +78,7 @@ class ChatsList extends Block {
           return;
         }
         this.props.profile.setProps({
-          avatar: profile.avatar,
+          avatar: getAvatar(profile.avatar),
           name: `${profile.first_name} ${profile.second_name}`,
         });
       },

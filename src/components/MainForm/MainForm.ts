@@ -10,13 +10,15 @@ class MainForm<Fields> extends Form<Fields> {
       type: string,
     }>,
     buttonText: string,
-    valid?: boolean
+    valid?: boolean,
+    error?: string,
     submit: (formObj: Fields) => void,
   }) {
     super({
       fields: props.fields,
       buttonText: props.buttonText,
       valid: props.valid,
+      error: props.error,
       submit: props.submit,
     });
   }
@@ -26,6 +28,7 @@ class MainForm<Fields> extends Form<Fields> {
     return mainForm({
       button: this.props.button,
       fields: this.props.fields,
+      error: this.props.error,
     });
   }
 }

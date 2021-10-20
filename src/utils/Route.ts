@@ -24,8 +24,6 @@ class Route {
     this.block = new this.BlockClass();
     this.currentRoot.innerHTML = '';
     this.currentRoot.appendChild(this.block.element);
-
-    // this.block.show();
   }
 }
 

@@ -6,6 +6,9 @@ import MainForm from '../../components/MainForm';
 import AuthService from '../../services/AuthService';
 import LoginRequest from '../../types/LoginRequest';
 import Router from '../../utils/Router';
+import memoize from '../../utils/memoize';
+import selectAuthError from '../../store/selectors/selectAuthError';
+import Store from '../../utils/Store';
 
 export default class AuthPage extends Block {
   constructor() {
@@ -36,6 +39,24 @@ export default class AuthPage extends Block {
           textLink: 'Регистрация',
         }),
       }),
+    });
+  }
+
+  componentDidMount() {
+    AuthService.checkNotAuth();
+    const memoizeErrorMessage = memoize(
+      (state) => selectAuthError(state),
+      (error) => {
+        if (!error) {
+          return;
+        }
+        this.props.form.props.form.setProps({
+          error: error.reason,
+        });
+      },
+    );
+    Store.subscribe((state) => {
+      memoizeErrorMessage(state);
     });
   }
 

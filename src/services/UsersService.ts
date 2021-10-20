@@ -1,7 +1,13 @@
 import UsersAPI from '../api/user-api';
+import clearPasswordError from '../store/actrionCreaters/clearPasswordError';
+import clearProfileError from '../store/actrionCreaters/clearProfileError';
+import setPasswordError from '../store/actrionCreaters/setPasswordError';
+import setProfile from '../store/actrionCreaters/setProfile';
+import setProfileError from '../store/actrionCreaters/setProfileError';
 import setSearchUsers from '../store/actrionCreaters/setSearchUsers';
 import checkChatRoot from '../store/selectors/checkChatRoot';
 import selectSearchUsers from '../store/selectors/selectSearchUsers';
+import { UpdateProfileUser } from '../types/User';
 import Store from '../utils/Store';
 
 class UsersService {
@@ -26,6 +32,28 @@ class UsersService {
       Store.dispatch(setSearchUsers(users));
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  public async updateProfile(user: UpdateProfileUser) {
+    try {
+      const profile = await this.api.update(user);
+      Store.dispatch(setProfile(profile));
+      Store.dispatch(clearProfileError());
+    } catch (error) {
+      Store.dispatch(setProfileError(error));
+    }
+  }
+
+  public async updatePassword(user: {
+    oldPassword: string,
+    newPassword: string,
+  }) {
+    try {
+      await this.api.updatePassword(user);
+      Store.dispatch(clearPasswordError());
+    } catch (error) {
+      Store.dispatch(setPasswordError(error));
     }
   }
 }

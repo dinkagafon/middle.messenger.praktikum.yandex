@@ -10,7 +10,7 @@ class CreateChat extends Block {
         valid: true,
         buttonText: 'Создать чат',
         fields: [{
-          placeholder: 'Название текст',
+          placeholder: 'Название чата',
           name: 'name',
           type: 'text',
         }],

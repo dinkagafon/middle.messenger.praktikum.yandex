@@ -20,3 +20,7 @@ export interface User extends BaseUser {
 export interface Member extends User {
   role: string,
 }
+
+export interface UpdateProfileUser extends BaseUser {
+  display_name: string | null,
+}

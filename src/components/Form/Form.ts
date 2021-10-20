@@ -11,7 +11,8 @@ class Form<Fields> extends Block {
       type: string,
     }>,
     buttonText: string,
-    valid?: boolean
+    valid?: boolean,
+    error?: string,
     submit: (formObj: Fields) => void,
   }) {
     const fieldsArray: Array<Input> = props.fields

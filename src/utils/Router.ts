@@ -10,7 +10,7 @@ class Router {
 
   private history: History;
 
-  constructor(currentRoot: HTMLElement) {
+  constructor(currentRoot?: HTMLElement) {
     if (Router.instance) {
       return Router.instance;
     }
@@ -31,14 +31,15 @@ class Router {
   }
 
   start() {
-    window.onpopstate = (() => {
+    window.onpopstate = ((e) => {
+      const window = e.target as Window;
       this.onRoute(window.location.pathname);
     });
 
     this.onRoute(window.location.pathname);
   }
 
-  onRoute(pathname: string) {
+  private onRoute(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
       return;
@@ -59,7 +60,7 @@ class Router {
     this.history.forward();
   }
 
-  getRoute(pathname: string) {
+  private getRoute(pathname: string) {
     return this.routes.find((route) => route.match(pathname));
   }
 }

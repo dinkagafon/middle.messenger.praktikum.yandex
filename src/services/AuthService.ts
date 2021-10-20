@@ -1,5 +1,7 @@
 import AuthAPI from '../api/auth-api';
+import setAuthError from '../store/actrionCreaters/setAuthError';
 import setProfile from '../store/actrionCreaters/setProfile';
+import setRegError from '../store/actrionCreaters/setRegError';
 import LoginRequest from '../types/LoginRequest';
 import { RegUser } from '../types/User';
 import Router from '../utils/Router';
@@ -17,7 +19,7 @@ class AuthService {
       await this.api.login(data);
       (new Router()).go('/');
     } catch (error) {
-      console.log(error);
+      Store.dispatch(setAuthError(error));
     }
   }
 
@@ -34,8 +36,8 @@ class AuthService {
     try {
       await this.api.create(data);
       (new Router()).go('/');
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      Store.dispatch(setRegError(error));
     }
   }
 
@@ -46,6 +48,12 @@ class AuthService {
     } catch (err) {
       (new Router()).go('/auth');
     }
+  }
+
+  public async checkNotAuth() {
+    const user = await this.api.request();
+    (new Router()).go('/');
+    Store.dispatch(setProfile(user));
   }
 }
 

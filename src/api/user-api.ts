@@ -1,4 +1,4 @@
-import { User } from '../types/User';
+import { Profile, UpdateProfileUser, User } from '../types/User';
 import BaseAPI from '../utils/base-api';
 import HTTP from '../utils/HTTP';
 
@@ -9,7 +9,19 @@ class UsersAPI extends BaseAPI {
     return userAPIInstance.post<{ login: string }, Array<User>>('/search', { login });
   }
 
-  update: undefined;
+  public update(user: UpdateProfileUser) {
+    return userAPIInstance.put<UpdateProfileUser, Profile>('/profile', user);
+  }
+
+  public updatePassword(pass: {
+    oldPassword: string,
+    newPassword: string,
+  }) {
+    return userAPIInstance.put<{
+      oldPassword: string,
+      newPassword: string,
+    }, string>('/password', pass);
+  }
 
   create: undefined;
 

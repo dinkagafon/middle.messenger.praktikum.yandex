@@ -1,6 +1,7 @@
 import MembersService from '../../services/MembersService';
 import { Member } from '../../types/User';
 import Block from '../../utils/Block';
+import getAvatar from '../../utils/getAvatar';
 import Button from '../Button';
 import Icon from '../Icon';
 import ProfileButton from '../ProfileButton';
@@ -36,7 +37,7 @@ class MemberItom extends Block {
     super('div', {}, {
       login: props.member.login,
       profile: new ProfileButton({
-        avatar: props.member.avatar || '',
+        avatar: getAvatar(props.member.avatar),
         name: `${props.member.first_name} ${props.member.second_name} (${props.member.login})`,
         link: `/user/${props.member.login}`,
       }),

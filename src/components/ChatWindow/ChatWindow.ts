@@ -9,6 +9,7 @@ import CreateMessege from '../CreateMessege';
 import MessagesList from '../MessagesList';
 import MembersService from '../../services/MembersService';
 import Icon from '../Icon';
+import getAvatar from '../../utils/getAvatar';
 
 class ChatWindow extends Block {
   constructor() {
@@ -41,7 +42,7 @@ class ChatWindow extends Block {
         return;
       }
       this.props.profile.setProps({
-        avatar: chat.avatar,
+        avatar: getAvatar(chat.avatar),
         name: chat.title,
       });
     });

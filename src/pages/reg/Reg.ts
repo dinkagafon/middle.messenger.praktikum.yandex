@@ -5,7 +5,10 @@ import Identification from '../../components/Identification';
 import Helper from '../../components/Helper';
 import Router from '../../utils/Router';
 import AuthService from '../../services/AuthService';
-import { UserForReg } from '../../types/User';
+import memoize from '../../utils/memoize';
+import selectRegError from '../../store/selectors/selectRegError';
+import Store from '../../utils/Store';
+import { RegUser } from '../../types/User';
 
 export default class AuthPage extends Block {
   constructor() {
@@ -46,18 +49,36 @@ export default class AuthPage extends Block {
             type: 'password',
             validFunc: (value: string) => /^(?=.*[A-ZА-Я])(?=.*\d).{8,40}$/.test(value),
           }],
-          submit: (formObj: UserForReg) => {
+          submit: (formObj: RegUser) => {
             AuthService.reg(formObj);
           },
         }),
         helper: new Helper({
-          text: 'Нет аккаунта?',
+          text: 'Уже есть аккаун?',
           onclick: () => {
             (new Router()).go('/auth');
           },
-          textLink: 'Регистрация',
+          textLink: 'Войти',
         }),
       }),
+    });
+  }
+
+  componentDidMount() {
+    AuthService.checkNotAuth();
+    const memoizeErrorMessage = memoize(
+      (state) => selectRegError(state),
+      (error) => {
+        if (!error) {
+          return;
+        }
+        this.props.regForm.props.form.setProps({
+          error: error.reason,
+        });
+      },
+    );
+    Store.subscribe((state) => {
+      memoizeErrorMessage(state);
     });
   }
 
