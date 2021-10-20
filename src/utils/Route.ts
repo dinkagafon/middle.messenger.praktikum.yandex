@@ -17,7 +17,7 @@ class Route {
   }
 
   match(pathname: string) {
-    return pathname === this.pathname;
+    return this.pathname.startsWith(pathname);
   }
 
   render() {
