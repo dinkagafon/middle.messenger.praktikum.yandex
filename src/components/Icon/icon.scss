@@ -1,0 +1,15 @@
+.icon {
+  height: 24px;
+  width: 24px;
+  &_name {
+    &_sliders {
+      background-image: url("../static/icons/sliders.svg");
+    }
+    &_plus-square {
+      background-image: url("../static/icons/plus-square.svg");
+    }
+    &_trash-2 {
+      background-image: url("../static/icons/trash-2.svg");
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.chat-settings {
+  &_members {
+    margin-top: 20px;
+  }
+  &_header {
+    @include text-header;
+    color: var(--text-basic);
+    display: flex;
+    justify-content: start;
+    margin-bottom: 20px;
+  }
+}

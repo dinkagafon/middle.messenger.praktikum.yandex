@@ -1,40 +1,38 @@
 import ChatsList from '../../components/ChatsList';
 import Block from '../../utils/Block';
 import chat from './chat.pug';
-import imageURL from '../../../static/img/avatar.jpg';
-import Input from '../../components/Input';
 import ChatWindow from '../../components/ChatWindow';
+import PopUp from '../../components/PopUp';
+import Store from '../../utils/Store';
+import setChatNamePopUpDisable from '../../store/actrionCreaters/setChatNamePopUpDisable';
+import CreateChat from '../../components/CreateChat';
+import selectCreateChatPopUpVisible from '../../store/selectors/selectCreateChatPopUpVisible';
+import setChatSettingsPopUpDisable from '../../store/actrionCreaters/setChatSettingsPopUpDisable';
+import selectChatSettingPopUpVisible from '../../store/selectors/selectChatSettingPopUpVisible';
+import ChatSettings from '../../components/ChatSettings';
+import memoize from '../../utils/memoize';
+import AuthService from '../../services/AuthService';
+import ChatsService from '../../services/ChatsService';
 
 export default class Chat extends Block {
   constructor() {
     super('div', {}, {
-      chatList: new ChatsList({
-        chats: [{
-          author: 'Анастасия, Анастасия, Анастасия, Анастасия, Анастасия, Анастасия,',
-          message: 'Существуют две основные трактовки понятия «текст»: имманентная (расширенная, философски нагруженная) и репрезентативная (более частная).',
-          date: '22.01.21',
-          count: '0',
-          img: imageURL,
-        }, {
-          author: 'Анастасия',
-          message: 'Существуют две основные ',
-          date: '25.01.21',
-          count: '2',
-          img: imageURL,
-        }, {
-          author: 'Никита',
-          message: 'Существуют',
-          date: '25.01.21',
-          count: '20',
-          img: imageURL,
-        }],
-        search: new Input({
-          placeholder: 'Поиск',
-          name: 'search',
-          type: 'text',
-        }),
-      }),
+      chatList: new ChatsList(),
       chatWindow: new ChatWindow(),
+      chatNamePopUp: new PopUp({
+        disableFunc: () => {
+          Store.dispatch(setChatNamePopUpDisable());
+        },
+        content: new CreateChat(),
+        active: true,
+      }),
+      chatSettingsPopUp: new PopUp({
+        disableFunc: () => {
+          Store.dispatch(setChatSettingsPopUpDisable());
+        },
+        content: new ChatSettings(),
+        active: true,
+      }),
     });
   }
 
@@ -43,11 +41,39 @@ export default class Chat extends Block {
     this.attrs.class = baseClass;
   }
 
+  componentDidMount() {
+    document.title = 'Практикум чат';
+    AuthService.getProfile();
+    ChatsService.init();
+    const memoizeCreateChat = memoize(
+      (state) => selectCreateChatPopUpVisible(state),
+      (data) => {
+        this.props.chatNamePopUp.setProps({
+          active: data,
+        });
+      },
+    );
+    const memoizeChatSetting = memoize(
+      (state) => selectChatSettingPopUpVisible(state),
+      (data) => {
+        this.props.chatSettingsPopUp.setProps({
+          active: data,
+        });
+      },
+    );
+    Store.subscribe((state) => {
+      memoizeCreateChat(state);
+      memoizeChatSetting(state);
+    });
+  }
+
   render() {
     this.setClass();
     return chat({
       chatList: this.props.chatList,
       chatWindow: this.props.chatWindow,
+      chatNamePopUp: this.props.chatNamePopUp,
+      chatSettingsPopUp: this.props.chatSettingsPopUp,
     });
   }
 }

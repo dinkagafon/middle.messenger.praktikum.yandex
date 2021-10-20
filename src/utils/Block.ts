@@ -53,14 +53,14 @@ class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  registerEvents(eventBus: EventBus) {
+  private registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidMountIn.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this.componentDidUpdateIn.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this.renderIn.bind(this));
   }
 
-  bindBlockToEvents(events: Events): Events {
+  private bindBlockToEvents(events: Events): Events {
     const newEvents: Events = {};
     Object.entries(events).forEach(([event, func]) => {
       newEvents[event] = (e) => {
@@ -70,7 +70,7 @@ class Block {
     return newEvents;
   }
 
-  makePropsProxy(props: Props) {
+  private makePropsProxy(props: Props) {
     const proxy = new Proxy(props, {
       set: (target, prop: string, val: any) => {
         const old: Props = { ...target };
@@ -88,7 +88,7 @@ class Block {
     return proxy;
   }
 
-  init() {
+  private init() {
     this.createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
@@ -103,7 +103,7 @@ class Block {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-  renderBlocks(block: string) {
+  private renderBlocks(block: string) {
     const fragment = document.createElement('template');
     fragment.innerHTML = block;
     Object.values(this.props)
@@ -188,12 +188,10 @@ class Block {
     Object.assign(this.props, nextProps);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   public render(): string {
     return '';
   }
 
-  // eslint-disable-next-line class-methods-use-this
   public componentDidMount() {}
 
   public componentDidUpdate(_oldProps: Props, _newProps: Props) {}

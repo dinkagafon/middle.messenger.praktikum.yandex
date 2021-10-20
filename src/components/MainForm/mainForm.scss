@@ -8,4 +8,9 @@
   &_button {
     margin-top: 14px;
   }
+  &_error {
+    color: var(--UI-text-danger);
+    margin-top: 10px;
+    text-align: center;
+  }
 }

@@ -1,0 +1,8 @@
+.member-itom {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  &__button {
+    margin-right: 16px;
+  }
+}

@@ -2,27 +2,50 @@ import Block from '../../utils/Block';
 import ProfileButton from '../ProfileButton';
 import chatWindow from './chatWindow.pug';
 import imageURL from '../../../static/img/avatar.jpg';
-import Input from '../Input';
+import Button from '../Button';
+import Store from '../../utils/Store';
+import selectActiveChat from '../../store/selectors/selectActiveChat';
+import CreateMessege from '../CreateMessege';
+import MessagesList from '../MessagesList';
+import MembersService from '../../services/MembersService';
+import Icon from '../Icon';
+import getAvatar from '../../utils/getAvatar';
 
 class ChatWindow extends Block {
   constructor() {
     super('div', {}, {
       profile: new ProfileButton({
         avatar: imageURL,
-        link: '/profile',
-        name: 'Агафонов Никита',
+        name: '',
       }),
-      input: new Input({
-        placeholder: 'Напишите сообщение',
-        name: 'message',
-        type: 'text',
+      chatSettingsButton: new Button({
+        content: new Icon({
+          name: 'sliders',
+        }),
+        theme: 'icon',
+        onclick: () => MembersService.openMembersPopUp(),
       }),
+      message: new CreateMessege(),
+      messagesList: new MessagesList(),
     });
   }
 
   setClass() {
     const baseClass = 'chat-window';
     this.attrs.class = baseClass;
+  }
+
+  componentDidMount() {
+    Store.subscribe((state) => {
+      const chat = selectActiveChat(state);
+      if (!chat) {
+        return;
+      }
+      this.props.profile.setProps({
+        avatar: getAvatar(chat.avatar),
+        name: chat.title,
+      });
+    });
   }
 
   render() {

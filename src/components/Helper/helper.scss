@@ -1,13 +1,9 @@
 .helper {
-  &_text {
+  &__text {
     @include text-regular;
     color: var(--text-disable);
   }
-  &_link {
-    @include text-regular;
-    border-bottom: 1px solid var(--text-basic);
-    color: var(--text-basic);
+  &__button {
     margin-left: 6px;
-    text-decoration: none;
   }
 }

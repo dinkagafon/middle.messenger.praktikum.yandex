@@ -1,0 +1,6 @@
+.create-message {
+  display: flex;
+  &_input {
+    flex-grow: 1;
+  }
+}

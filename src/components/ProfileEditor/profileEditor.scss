@@ -1,0 +1,24 @@
+.profile-editor {
+  background-color: var(--UI-back-light);
+  border-radius: 4px;
+  overflow: hidden;
+  width: 388px;
+  &_body {
+    padding: 28px 50px;
+  }
+  &_title {
+    @include text-header;
+    color: var(--text-basic);
+    display: flex;
+    justify-content: center;
+  }
+  &_dataform {
+    margin-top: 22px;
+  }
+  &_helper {
+    background-color: var(--UI-back-dark);
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+  }
+}
