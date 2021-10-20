@@ -31,6 +31,7 @@ class UsersService {
       const users = await this.api.search(login);
       Store.dispatch(setSearchUsers(users));
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }

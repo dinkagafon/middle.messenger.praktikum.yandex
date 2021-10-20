@@ -25,6 +25,7 @@ class MembersService {
       const members = await this.api.request(chatId);
       Store.dispatch(setMembers({ chatId, members }));
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -38,6 +39,7 @@ class MembersService {
       await this.api.create({ userId, chatId: chat.id });
       this.get(chat.id);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -51,6 +53,7 @@ class MembersService {
       await this.api.delete({ userId, chatId: chat.id });
       this.get(chat.id);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }

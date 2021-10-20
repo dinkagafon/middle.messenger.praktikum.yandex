@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const router = new Router(root);
     router
       .use('/', Chat)
-      .use('/auth', Auth)
-      .use('/reg', Reg)
-      .use('/profile', Profile)
+      .use('/auth/', Auth)
+      .use('/reg/', Reg)
+      .use('/profile/', Profile)
       .start();
   }
   /* let page;

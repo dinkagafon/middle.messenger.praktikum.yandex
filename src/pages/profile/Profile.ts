@@ -21,6 +21,7 @@ export default class Profile extends Block {
   }
 
   componentDidMount() {
+    document.title = 'Настройки профиля';
     AuthService.getProfile();
   }
 

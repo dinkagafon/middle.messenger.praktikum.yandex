@@ -19,17 +19,17 @@ describe('Router', () => {
   it('should registrate two Routes', () => {
     const { router } = initRouter();
     router
-      .use('/test', Block)
-      .use('/test2', Block);
+      .use('/test/', Block)
+      .use('/test2/', Block);
     expect(router.routes.length).to.eq(2);
     expect(router.routes[0]).to.be.an.instanceof(Route);
-    expect(router.routes[1].pathname).to.eq('/test2');
+    expect(router.routes[1].pathname).to.eq('/test2/');
   });
   it('should add listener in popstate and render base route', () => {
     const { router, rootElem } = initRouter();
     router
       .use('/', Block)
-      .use('/test2', Block)
+      .use('/test2/', Block)
       .start();
     expect(rootElem.children.length).to.eq(1);
     expect(window.onpopstate).to.be.a('function');
@@ -38,10 +38,10 @@ describe('Router', () => {
     const { router } = initRouter();
     router
       .use('/', Block)
-      .use('/test2', Block)
+      .use('/test2/', Block)
       .start();
-    router.go('/test2');
-    expect(window.location.pathname).to.eq('/test2');
+    router.go('/test2/');
+    expect(window.location.pathname).to.eq('/test2/');
     expect(window.history.length).to.eq(2);
   });
   it('should call back method', () => {

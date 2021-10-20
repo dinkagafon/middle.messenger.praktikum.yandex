@@ -42,6 +42,7 @@ export default class Chat extends Block {
   }
 
   componentDidMount() {
+    document.title = 'Практикум чат';
     AuthService.getProfile();
     ChatsService.init();
     const memoizeCreateChat = memoize(

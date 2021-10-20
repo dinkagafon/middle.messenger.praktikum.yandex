@@ -34,7 +34,7 @@ export default class AuthPage extends Block {
         helper: new Helper({
           text: 'Нет аккаунта?',
           onclick: () => {
-            (new Router()).go('/reg');
+            (new Router()).go('/reg/');
           },
           textLink: 'Регистрация',
         }),
@@ -43,6 +43,7 @@ export default class AuthPage extends Block {
   }
 
   componentDidMount() {
+    document.title = 'Вход';
     AuthService.checkNotAuth();
     const memoizeErrorMessage = memoize(
       (state) => selectAuthError(state),

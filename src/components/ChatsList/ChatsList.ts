@@ -41,7 +41,7 @@ class ChatsList extends Block {
       }),
       profile: new ProfileButton({
         avatar: '',
-        link: '/profile',
+        link: '/profile/',
         name: '',
       }),
     });

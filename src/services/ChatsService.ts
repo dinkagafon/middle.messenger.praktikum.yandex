@@ -21,6 +21,7 @@ class ChatsService {
         MessagesService.connect(chat.id);
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
@@ -44,6 +45,7 @@ class ChatsService {
       Store.dispatch(setChatNamePopUpDisable());
       this.init();
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log(err);
     }
   }

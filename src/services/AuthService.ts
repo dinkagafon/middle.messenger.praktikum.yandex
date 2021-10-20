@@ -26,8 +26,9 @@ class AuthService {
   public async logout() {
     try {
       await this.api.logout();
-      (new Router()).go('/auth');
+      (new Router()).go('/auth/');
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log(err);
     }
   }
@@ -46,7 +47,7 @@ class AuthService {
       const user = await this.api.request();
       Store.dispatch(setProfile(user));
     } catch (err) {
-      (new Router()).go('/auth');
+      (new Router()).go('/auth/');
     }
   }
 
