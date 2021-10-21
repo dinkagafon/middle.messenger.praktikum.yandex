@@ -17,6 +17,10 @@ class ChatsAPI extends BaseAPI {
     return chatsAPIInstance.post<undefined, { token: string }>(`/token/${chatId}`);
   }
 
+  public updateAvatar(formData: FormData) {
+    return chatsAPIInstance.put<FormData, Chat>('/avatar', formData);
+  }
+
   update: undefined;
 
   delete: undefined;

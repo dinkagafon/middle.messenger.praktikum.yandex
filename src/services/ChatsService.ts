@@ -1,7 +1,10 @@
 import ChatsAPI from '../api/chats-api';
 import setActiveChatId from '../store/actrionCreaters/setActiveChatId';
+import setChatAvatar from '../store/actrionCreaters/setChatAvatar';
 import setChatNamePopUpDisable from '../store/actrionCreaters/setChatNamePopUpDisable';
 import setChats from '../store/actrionCreaters/setChats';
+import checkChatRoot from '../store/selectors/checkChatRoot';
+import selectActiveChat from '../store/selectors/selectActiveChat';
 import selectChat from '../store/selectors/selectChat';
 import Store from '../utils/Store';
 import MessagesService from './MessagesService';
@@ -47,6 +50,28 @@ class ChatsService {
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err);
+    }
+  }
+
+  public async updateAvatar(avatarFile: File) {
+    try {
+      const state = Store.getState();
+      const chat = selectActiveChat(state);
+      if (!chat) {
+        return;
+      }
+      const chatRoot = checkChatRoot(state);
+      if (!chatRoot) {
+        return;
+      }
+      const formData = new FormData();
+      formData.append('avatar', avatarFile);
+      formData.append('chatId', chat.id.toString());
+      const newChat = await this.api.updateAvatar(formData);
+      Store.dispatch(setChatAvatar(chat.id, newChat.avatar));
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
     }
   }
 }
