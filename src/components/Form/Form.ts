@@ -80,6 +80,17 @@ class Form<Fields> extends Block {
     return statusFields;
   }
 
+  setFormValues(values: Record<string, string>) {
+    Object.entries(values).forEach(([name, value]) => {
+      const inputBlock: Input = this.props.fields.find((input: Input) => input.props.name === name);
+      if (!inputBlock) {
+        return;
+      }
+      const input = inputBlock.element as HTMLInputElement;
+      input.value = value;
+    });
+  }
+
   getFormValues() {
     const result = this.props.fields.reduce((sum: Record<string, string>, cur: Input) => {
       const inputName: string = cur.attrs.name;

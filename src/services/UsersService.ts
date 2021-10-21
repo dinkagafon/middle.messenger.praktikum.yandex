@@ -57,6 +57,18 @@ class UsersService {
       Store.dispatch(setPasswordError(error));
     }
   }
+
+  public async updateAvatar(avatarFile: File) {
+    try {
+      const formData = new FormData();
+      formData.append('avatar', avatarFile);
+      const profile = await this.api.updateAvatar(formData);
+      Store.dispatch(setProfile(profile));
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  }
 }
 
 export default new UsersService();

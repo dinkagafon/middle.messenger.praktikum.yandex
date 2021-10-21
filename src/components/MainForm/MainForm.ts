@@ -23,7 +23,6 @@ class MainForm<Fields> extends Form<Fields> {
     });
   }
 
-  // eslint-disable-next-line class-methods-use-this
   render() {
     return mainForm({
       button: this.props.button,

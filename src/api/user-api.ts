@@ -23,6 +23,10 @@ class UsersAPI extends BaseAPI {
     }, string>('/password', pass);
   }
 
+  public updateAvatar(formData: FormData) {
+    return userAPIInstance.put<FormData, Profile>('/profile/avatar', formData);
+  }
+
   create: undefined;
 
   request: undefined;

@@ -20,6 +20,7 @@ class Input extends Block {
       wrong: false,
       validFunc: props.validFunc,
       fullHeight: props.fullHeight,
+      name: props.name,
     });
   }
 

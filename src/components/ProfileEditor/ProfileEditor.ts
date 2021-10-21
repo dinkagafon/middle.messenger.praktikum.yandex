@@ -1,10 +1,13 @@
 import UsersService from '../../services/UsersService';
 import selectPasswordError from '../../store/selectors/selectPasswordError';
+import selectProfile from '../../store/selectors/selectProfile';
 import selectProfileError from '../../store/selectors/selectProfileError';
 import { UpdateProfileUser } from '../../types/User';
 import Block from '../../utils/Block';
+import getAvatar from '../../utils/getAvatar';
 import memoize from '../../utils/memoize';
 import Store from '../../utils/Store';
+import AvatarChanger from '../AvatarChanger';
 import Helper from '../Helper';
 import MainForm from '../MainForm';
 import profileEditor from './profileEditor.pug';
@@ -16,6 +19,19 @@ class ProfileEditor extends Block {
   }) {
     super('div', {}, {
       title: props.title,
+      avatarChanger: new AvatarChanger({
+        name: 'avatar',
+        onchange: (e) => {
+          e?.preventDefault();
+          const { files } = e?.target as HTMLInputElement;
+          if (!files || !files[0]) {
+            return;
+          }
+          const [file] = files;
+          UsersService.updateAvatar(file);
+        },
+        avatarLink: '',
+      }),
       dataForm: new MainForm({
         valid: true,
         buttonText: 'Изменить данные',
@@ -94,9 +110,29 @@ class ProfileEditor extends Block {
         });
       },
     );
+    const memoizeProfile = memoize(
+      (state) => selectProfile(state),
+      (profile) => {
+        if (!profile) {
+          return;
+        }
+        this.props.avatarChanger.setProps({
+          avatarLink: getAvatar(profile.avatar),
+        });
+        this.props.dataForm.setFormValues({
+          first_name: profile.first_name,
+          second_name: profile.second_name,
+          login: profile.login,
+          display_name: profile.display_name,
+          email: profile.email,
+          phone: profile.phone,
+        });
+      },
+    );
     Store.subscribe((state) => {
       memoizeProfileError(state);
       memoizePasswordError(state);
+      memoizeProfile(state);
     });
   }
 
@@ -105,7 +141,9 @@ class ProfileEditor extends Block {
       title: this.props.title,
       dataForm: this.props.dataForm,
       passwordForm: this.props.passwordForm,
+      avatarChangeInput: this.props.avatarChangeInput,
       helper: this.props.helper,
+      avatarChanger: this.props.avatarChanger,
     });
   }
 }
