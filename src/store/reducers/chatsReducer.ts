@@ -39,6 +39,16 @@ const chatsReducer: Reducer<Array<Chat>> = (state = [], action) => {
         }
         return { ...chat };
       });
+    case 'chats/SETCHATAVATAR':
+      return state.map((chat: Chat) => {
+        if (chat.id === action.payload.chatId) {
+          return {
+            ...chat,
+            avatar: action.payload.avatar,
+          };
+        }
+        return { ...chat };
+      });
     default:
       return state;
   }

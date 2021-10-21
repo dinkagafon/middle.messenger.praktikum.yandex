@@ -9,11 +9,27 @@ import Input from '../Input';
 import chatSettings from './chatSettings.pug';
 import checkChatRoot from '../../store/selectors/checkChatRoot';
 import MemberItom from '../MemberItom';
+import AvatarChanger from '../AvatarChanger';
+import getAvatar from '../../utils/getAvatar';
+import ChatsService from '../../services/ChatsService';
 
 class ChatSettings extends Block {
   constructor() {
     super('div', {}, {
       header: '',
+      avatarChanger: new AvatarChanger({
+        name: 'avatarChat',
+        avatarLink: getAvatar(''),
+        onchange: (e) => {
+          e?.preventDefault();
+          const { files } = e?.target as HTMLInputElement;
+          if (!files || !files[0]) {
+            return;
+          }
+          const [file] = files;
+          ChatsService.updateAvatar(file);
+        },
+      }),
       members: new ChatSettingsUsers(),
       search: new Input({
         placeholder: 'Поиск пользователей',
@@ -48,6 +64,9 @@ class ChatSettings extends Block {
         this.setProps({
           header: data.title,
         });
+        this.props.avatarChanger.setProps({
+          avatarLink: getAvatar(data.avatar),
+        });
       },
     );
     const memoizeUsers = memoize(
@@ -61,9 +80,24 @@ class ChatSettings extends Block {
         });
       },
     );
+    const memoizeRoot = memoize(
+      (state) => checkChatRoot(state),
+      (root) => {
+        if (!root) {
+          this.props.avatarChanger.setProps({
+            forId: '',
+          });
+        } else {
+          this.props.avatarChanger.setProps({
+            forId: 'avatarChat',
+          });
+        }
+      },
+    );
     Store.subscribe((state) => {
       memoizeSetTitle(state);
       memoizeUsers(state);
+      memoizeRoot(state);
     });
   }
 

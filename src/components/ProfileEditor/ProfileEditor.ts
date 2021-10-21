@@ -30,7 +30,7 @@ class ProfileEditor extends Block {
           const [file] = files;
           UsersService.updateAvatar(file);
         },
-        avatarLink: '',
+        avatarLink: getAvatar(''),
       }),
       dataForm: new MainForm({
         valid: true,
