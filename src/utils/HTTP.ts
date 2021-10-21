@@ -90,11 +90,14 @@ class HTTP {
       xhr.timeout = this.timeout;
       xhr.ontimeout = reject;
       xhr.withCredentials = true;
-      xhr.setRequestHeader('Content-Type', 'application/json');
+
       if (method === METHODS.GET || !data) {
         xhr.send();
-      } else {
+      } else if (!(data instanceof FormData)) {
+        xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
+      } else {
+        xhr.send(data);
       }
     });
   }
