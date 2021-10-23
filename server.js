@@ -3,10 +3,10 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-app.use(express.static('./build'));
-app.use('*', express.static('./build'));
+app.use(express.static('./dist'));
+app.use('*', express.static('./dist'));
 app.get('/*', (req, res) => {
-  res.sendFile('./build/index.html');
+  res.sendFile('./dist/index.html');
 })
 
 app.listen(PORT, function () {

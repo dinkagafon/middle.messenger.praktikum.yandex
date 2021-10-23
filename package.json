@@ -6,7 +6,8 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "build": "webpack --mode development",
-    "start": "webpack-dev-server --mode development",
+    "start": "node server.js",
+    "dev": "webpack-dev-server --mode development",
     "lint:css": "stylelint src/**/*.scss",
     "lint:js": "node_modules/.bin/eslint .",
     "lint:all": "npm-run-all --parallel lint:css lint:js",
