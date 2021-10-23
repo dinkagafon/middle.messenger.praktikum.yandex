@@ -15,7 +15,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all --parallel test lint:all"
+      "pre-commit": "npm-run-all lint:all"
     }
   },
   "engines": {
