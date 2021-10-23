@@ -13,11 +13,6 @@
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all lint:all"
-    }
-  },
   "engines": {
     "node": "v14.17.3"
   },
