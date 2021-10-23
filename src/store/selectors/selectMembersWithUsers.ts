@@ -1,3 +1,4 @@
+import Indexed from '../../types/Indexed';
 import { Member } from '../../types/User';
 import selectActiveChat from './selectActiveChat';
 import selectSearchUsers from './selectSearchUsers';

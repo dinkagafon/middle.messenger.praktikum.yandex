@@ -1,4 +1,5 @@
 import Action from '../types/Action';
+import Indexed from '../types/Indexed';
 import Listener from './Listener';
 import Reducer from './Reducer';
 

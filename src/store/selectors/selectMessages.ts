@@ -1,3 +1,4 @@
+import Indexed from '../../types/Indexed';
 import Message from '../../types/Message';
 import selectActiveChat from './selectActiveChat';
 

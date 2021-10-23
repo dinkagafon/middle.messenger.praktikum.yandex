@@ -1,3 +1,4 @@
+import './style.scss';
 import Reg from './pages/reg/Reg';
 import Auth from './pages/auth/Auth';
 import Chat from './pages/chat/Chat';
@@ -20,32 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
       .use('/profile/', Profile)
       .start();
   }
-  /* let page;
-    const path = window.location.pathname;
-    switch (path) {
-      case '/':
-        page = new Reg();
-        break;
-      case '/reg.html':
-        page = new Reg();
-        break;
-      case '/auth.html':
-        page = new Auth();
-        break;
-      case '/chat.html':
-        page = new Chat();
-        break;
-      case '/profile.html':
-        page = new Profile();
-        break;
-      case '/500.html':
-        page = new Error500();
-        break;
-      default:
-        page = new Error404();
-        break;
-    }
-    root.appendChild(page.element); */
 
   render('.root');
 });

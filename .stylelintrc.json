@@ -1,6 +1,7 @@
 {
   "extends": ["stylelint-config-sass-guidelines", "stylelint-prettier/recommended"],
   "rules": {
+    "linebreaks": "windows",
     "max-nesting-depth": [
       2,
       {
@@ -12,5 +13,11 @@
         ]
       }
     ]
-  }
+  },
+  "prettier/prettier": [
+    "error",
+    {
+      "endOfLine": "auto"
+    }
+  ]
 }
