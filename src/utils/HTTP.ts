@@ -12,15 +12,19 @@ class HTTP {
 
   private timeout: number;
 
+  private formData?: boolean;
+
   private headers: { [index: string]: string };
 
   constructor(startUrl: string, options: {
     timeout?: number,
     headers?: { [index: string]: string }
+    formData?: boolean
   } = {}) {
     this.startUrl = startUrl;
     this.timeout = options.timeout || 10000;
     this.headers = options.headers || {};
+    this.formData = options.formData;
   }
 
   get<Response>(url: string) {
@@ -93,10 +97,10 @@ class HTTP {
 
       if (method === METHODS.GET || !data) {
         xhr.send();
-      } else if (!(data instanceof FormData)) {
+      } else if (!this.formData) {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
-      } else {
+      } else if (data instanceof FormData) {
         xhr.send(data);
       }
     });

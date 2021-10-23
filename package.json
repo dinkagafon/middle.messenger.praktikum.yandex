@@ -10,7 +10,8 @@
     "lint:css": "stylelint src/**/*.scss",
     "lint:js": "node_modules/.bin/eslint .",
     "lint:all": "npm-run-all --parallel lint:css lint:js",
-    "test": "mocha --require ts-node/register src/**/*.spec.ts"
+    "test": "mocha --require ts-node/register src/**/*.spec.ts",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {

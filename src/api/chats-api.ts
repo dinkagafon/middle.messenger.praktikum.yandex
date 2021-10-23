@@ -18,7 +18,8 @@ class ChatsAPI extends BaseAPI {
   }
 
   public updateAvatar(formData: FormData) {
-    return chatsAPIInstance.put<FormData, Chat>('/avatar', formData);
+    const api = new HTTP('https://ya-praktikum.tech/api/v2/chats', { formData: true });
+    return api.put<FormData, Chat>('/avatar', formData);
   }
 
   update: undefined;
