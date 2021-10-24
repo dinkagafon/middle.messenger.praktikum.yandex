@@ -5,7 +5,16 @@
   height: 100vh;
   position: static;
   width: 400px;
+  &__bar {
+    flex-grow: 1;
+  }
+  &__footer {
+    display: flex;
+  }
   &__profile {
-    margin-top: auto;
+    flex-grow: 1;
+  }
+  &__search {
+    display: flex;
   }
 }

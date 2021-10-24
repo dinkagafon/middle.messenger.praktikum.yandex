@@ -3,11 +3,17 @@ import auth from './auth.pug';
 import Helper from '../../components/Helper';
 import Identification from '../../components/Identification';
 import MainForm from '../../components/MainForm';
+import AuthService from '../../services/AuthService';
+import LoginRequest from '../../types/LoginRequest';
+import Router from '../../utils/Router';
+import memoize from '../../utils/memoize';
+import selectAuthError from '../../store/selectors/selectAuthError';
+import Store from '../../utils/Store';
 
 export default class AuthPage extends Block {
   constructor() {
     super('div', {}, {
-      form: new Identification({
+      form: new Identification<LoginRequest>({
         title: 'Вход',
         form: new MainForm({
           valid: true,
@@ -21,17 +27,37 @@ export default class AuthPage extends Block {
             name: 'password',
             type: 'password',
           }],
-          submit: (formObj: Record<string, string>) => {
-            // eslint-disable-next-line no-console
-            console.log(formObj);
+          submit: async (formObj) => {
+            await AuthService.login(formObj);
           },
         }),
         helper: new Helper({
           text: 'Нет аккаунта?',
-          link: '/reg.html',
+          onclick: () => {
+            (new Router()).go('/reg/');
+          },
           textLink: 'Регистрация',
         }),
       }),
+    });
+  }
+
+  componentDidMount() {
+    document.title = 'Вход';
+    AuthService.checkNotAuth();
+    const memoizeErrorMessage = memoize(
+      (state) => selectAuthError(state),
+      (error) => {
+        if (!error) {
+          return;
+        }
+        this.props.form.props.form.setProps({
+          error: error.reason,
+        });
+      },
+    );
+    Store.subscribe((state) => {
+      memoizeErrorMessage(state);
     });
   }
 

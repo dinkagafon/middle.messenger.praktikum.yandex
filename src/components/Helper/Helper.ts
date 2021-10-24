@@ -1,16 +1,21 @@
+import BlockEvent from '../../types/BlockEvent';
 import Block from '../../utils/Block';
+import Button from '../Button';
 import identification from './helper.pug';
 
 class Helper extends Block {
   constructor(props: {
     text: string,
-    link: string,
-    textLink: string
+    textLink: string,
+    onclick: BlockEvent,
   }) {
     super('div', {}, {
       text: props.text,
-      link: props.link,
-      textLink: props.textLink,
+      link: new Button({
+        onclick: props.onclick,
+        content: props.textLink,
+        theme: 'link',
+      }),
     });
   }
 
@@ -19,7 +24,6 @@ class Helper extends Block {
     return identification({
       text: this.props.text,
       link: this.props.link,
-      textLink: this.props.textLink,
     });
   }
 }

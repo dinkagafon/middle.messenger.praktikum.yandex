@@ -3,32 +3,46 @@ import ChatItem from '../ChatItem';
 import Input from '../Input';
 import ProfileButton from '../ProfileButton';
 import chatsList from './chatsList.pug';
-import imageURL from '../../../static/img/avatar.jpg';
+import Button from '../Button';
+import Store from '../../utils/Store';
+import selectChats from '../../store/selectors/selectChats';
+import setChatNamePopUpActive from '../../store/actrionCreaters/setChatNamePopUpActive';
+import memoize from '../../utils/memoize';
+import transformDate from '../../utils/transformDate';
+import selectProfile from '../../store/selectors/selectProfile';
+import ChatsBar from '../ChatBar';
+import getAvatar from '../../utils/getAvatar';
 
 class ChatsList extends Block {
-  constructor(props: {
-    chats: Array<{
-      author: string,
-      message: string,
-      date: string,
-      count: string,
-      img: string,
-    }>,
-    search: Input,
-  }) {
+  constructor() {
     super('div', {}, {
-      chats: props.chats.map((c) => new ChatItem({
-        author: c.author,
-        message: c.message,
-        date: c.date,
-        count: c.count,
-        img: c.img,
-      })),
-      search: props.search,
+      chatBar: new ChatsBar(),
+      search: new Input({
+        placeholder: 'Поиск по чатам',
+        name: 'search',
+        type: 'text',
+        events: {
+          input: (e: KeyboardEvent) => {
+            if (!e.target) {
+              return;
+            }
+            const input = e.target as HTMLInputElement;
+            this.props.chatBar.setProps({
+              searchValue: input.value,
+            });
+          },
+        },
+      }),
+      addChatButton: new Button({
+        content: 'Новый чат',
+        onclick: () => {
+          Store.dispatch(setChatNamePopUpActive());
+        },
+      }),
       profile: new ProfileButton({
-        avatar: imageURL,
-        link: '/profile',
-        name: 'Агафонов Никита',
+        avatar: '',
+        link: '/profile/',
+        name: '',
       }),
     });
   }
@@ -36,6 +50,43 @@ class ChatsList extends Block {
   setClass() {
     const baseClass = 'chat-list';
     this.attrs.class = baseClass;
+  }
+
+  componentDidMount() {
+    const memoizeSelectChats = memoize(
+      (state) => selectChats(state),
+      (data) => {
+        this.props.chatBar.setProps({
+          chats: data.map((c) => {
+            const lastMessege = c.messages ? c.messages[0] : c.last_message;
+            return new ChatItem({
+              id: c.id,
+              author: c.title,
+              message: lastMessege ? lastMessege.content : 'Пока нет сообщений',
+              date: lastMessege ? transformDate(lastMessege.time) : '',
+              count: c.unread_count,
+              img: getAvatar(c.avatar),
+            });
+          }),
+        });
+      },
+    );
+    const memoizeGetProfile = memoize(
+      (state) => selectProfile(state),
+      (profile) => {
+        if (!profile) {
+          return;
+        }
+        this.props.profile.setProps({
+          avatar: getAvatar(profile.avatar),
+          name: `${profile.first_name} ${profile.second_name}`,
+        });
+      },
+    );
+    Store.subscribe((state) => {
+      memoizeSelectChats(state);
+      memoizeGetProfile(state);
+    });
   }
 
   render() {

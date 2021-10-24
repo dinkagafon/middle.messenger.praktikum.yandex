@@ -5,8 +5,16 @@
   padding: 8px 16px;
   width: 100%;
   &:hover {
-    background-color: var(--UI-button-basic);
+    background-color: var(--UI-button-hover);
   }
+  &_active {
+    background-color: var(--UI-button-basic);
+    &:hover {
+      background-color: var(--UI-button-basic);
+      cursor: default;
+    }
+  }
+  
   &__main {
     display: flex;
     flex-basis: 100%;

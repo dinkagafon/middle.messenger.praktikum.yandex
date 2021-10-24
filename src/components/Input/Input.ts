@@ -6,6 +6,7 @@ class Input extends Block {
     placeholder: string,
     name: string,
     type: string,
+    fullHeight?: boolean,
     events?: Events,
     validFunc?: (v: string) => boolean
   }) {
@@ -18,6 +19,8 @@ class Input extends Block {
       events: props.events,
       wrong: false,
       validFunc: props.validFunc,
+      fullHeight: props.fullHeight,
+      name: props.name,
     });
   }
 
@@ -25,6 +28,9 @@ class Input extends Block {
     let baseClass = 'input';
     if (this.props.wrong) {
       baseClass = `${baseClass} input_wrong`;
+    }
+    if (this.props.fullHeight) {
+      baseClass = `${baseClass} input_fullHeight`;
     }
     this.attrs.class = baseClass;
   }
