@@ -1,10 +1,45 @@
-https://github.com/dinkagafon/middle.messenger.praktikum.yandex/pull/4
+# AgafonChat
+
 Это учебный мессенджер в рамках программы Яндекс Практикума.
-Во втором спринте добавлна блочная структура.
 
-yarn dev - запуска сервера Parcel
-yarn start - запуск сервера Express, который раздает статику из build
-yarn build - сборка проекта
+Мессенджер разарботан с использованием следующих технологий:
 
-Ссылка на Netlify - https://blissful-meitner-f351f8.netlify.app/
-Ссылка на фигму - https://www.figma.com/file/xyVhHRFqIzPWWTwhSEKHpE/Untitled?node-id=0%3A1
+
+
+- **TypeScript**
+- Шаблонизатор - **pug**
+- Препроцессор - **Scss**
+- Тестирование - **Chai**, **Mocha**, **Sinon**
+- Сборка - **Webpack**
+- Контейнеризация -  **Docker**
+- CSS линтер - **Stylelint**
+- TS линтер - **ESlint**
+- Контроль версий - **Git**
+
+
+____
+## Команды для сборки и запуска приложения
+____
+
+
+
+```
+    // Запуск режима разработчика
+    npm run dev 
+```
+```
+    // Сборка
+    npm run build 
+```
+```
+    // Запуск сервера
+    npm run start
+```
+____
+## Ссылки
+____
+
+
+[Figma](https://www.figma.com/file/xyVhHRFqIzPWWTwhSEKHpE/Untitled?node-id=0%3A1)
+[Netlify](https://blissful-meitner-f351f8.netlify.app/)
+[Heroku](https://agafon-chat.herokuapp.com/)
