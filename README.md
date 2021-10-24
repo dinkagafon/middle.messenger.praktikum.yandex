@@ -1,4 +1,4 @@
-https://github.com/dinkagafon/middle.messenger.praktikum.yandex/pull/4
+https://github.com/dinkagafon/middle.messenger.praktikum.yandex/pull/5
 Это учебный мессенджер в рамках программы Яндекс Практикума.
 Во втором спринте добавлна блочная структура.
 
