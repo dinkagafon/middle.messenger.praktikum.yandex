@@ -24,7 +24,8 @@ class UsersAPI extends BaseAPI {
   }
 
   public updateAvatar(formData: FormData) {
-    return userAPIInstance.put<FormData, Profile>('/profile/avatar', formData);
+    const api = new HTTP('https://ya-praktikum.tech/api/v2/user', { formData: true });
+    return api.put<FormData, Profile>('/profile/avatar', formData);
   }
 
   create: undefined;

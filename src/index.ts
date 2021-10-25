@@ -1,3 +1,4 @@
+import './style.scss';
 import Reg from './pages/reg/Reg';
 import Auth from './pages/auth/Auth';
 import Chat from './pages/chat/Chat';
@@ -20,32 +21,38 @@ document.addEventListener('DOMContentLoaded', () => {
       .use('/profile/', Profile)
       .start();
   }
-  /* let page;
-    const path = window.location.pathname;
-    switch (path) {
-      case '/':
-        page = new Reg();
-        break;
-      case '/reg.html':
-        page = new Reg();
-        break;
-      case '/auth.html':
-        page = new Auth();
-        break;
-      case '/chat.html':
-        page = new Chat();
-        break;
-      case '/profile.html':
-        page = new Profile();
-        break;
-      case '/500.html':
-        page = new Error500();
-        break;
-      default:
-        page = new Error404();
-        break;
-    }
-    root.appendChild(page.element); */
 
   render('.root');
 });
+
+interface StepFn {
+  (): number;
+  (value: number): StepFn;
+}
+
+function add(val: number): StepFn;
+function add(): number;
+function add(val?: number): StepFn | number {
+  let sum = 0;
+  if (typeof val !== 'number') {
+    return sum;
+  }
+  sum += val;
+
+  function carr(b: number): StepFn;
+  function carr(): number;
+  function carr(b?: number): number | StepFn {
+    if (!b) {
+      return sum;
+    }
+    sum += b;
+    return carr;
+  }
+  return carr;
+}
+
+export default add;
+
+add(); // => 0
+add(1)(); // => 1
+add(1)(2)(); // => 3
